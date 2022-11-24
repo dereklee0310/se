@@ -1,0 +1,69 @@
+<!--
+ * @Author: dereklee0310 dereklee0310.gmail.com
+ * @Date: 2022-11-24 10:14:30
+ * @LastEditors: dereklee0310 dereklee0310.gmail.com
+ * @LastEditTime: 2022-11-25 06:38:39
+ * @FilePath: \undefinedc:\Users\User\workspace\test_zone\se\index.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by dereklee0310 dereklee0310.gmail.com, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="HTML5 Example Page" />
+    <link rel="stylesheet" href="/assets/css/stylesheet.css?v=1" />
+  </head>
+  <body>
+    <h1>Form of User Info</h1>
+    <form action="/form" method="post" class="form">
+      <div class="row">
+        <label for="name">Name:</label><br />
+        <input type="text" placeholder="" id="name" name="name" />
+      </div>
+      <div class="row">
+        <label for="age">Age:</label><br />
+        <input type="text" placeholder="" id="age" name="age" />
+      </div>
+      <div class="row">
+        <!-- <label for="gender">Gender:</label><br /> -->
+        Gender:<br />
+        <input type="radio" id="male" name="gender" value="male" checked />
+        <label for="male">male</label>
+      </div>
+      <div>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">female</label>
+      </div>
+      <div>
+        <input
+          type="radio"
+          id="third gender"
+          name="gender"
+          value="third gender"
+        />
+        <label for="third gender">third gender</label>
+      </div>
+      <div class="row">
+        <label for="loaction">Location:</label><br />
+        <!-- <textarea placeholder="" id="loaction"></textarea> -->
+        <input type="text" placeholder="" id="location" name=""/>
+      </div>
+      <div class="row">
+        <label for="time">Photo taken on:</label><br />
+        <!-- <textarea placeholder="" id="loaction"></textarea> -->
+        <input type="text" placeholder="" id="time" name="time" />
+      </div>
+      <!-- <div class="row">
+            <label>
+              <input type="checkbox" id="exampleConfirmation"><span>Confirmation</span>
+            </label>
+          </div> -->
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
