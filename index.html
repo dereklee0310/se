@@ -1,9 +1,9 @@
 <!--
  * @Author: dereklee0310 dereklee0310.gmail.com
  * @Date: 2022-11-24 10:14:30
- * @LastEditors: dereklee0310 dereklee0310.gmail.com
- * @LastEditTime: 2022-11-25 06:38:39
- * @FilePath: \undefinedc:\Users\User\workspace\test_zone\se\index.html
+ * @LastEditors: Derek Lee dereklee0310@gmail.com
+ * @LastEditTime: 2022-11-27 11:28:08
+ * @FilePath: /se_test/index.html
  * @Description: 
  * 
  * Copyright (c) 2022 by dereklee0310 dereklee0310.gmail.com, All Rights Reserved. 
@@ -20,7 +20,7 @@
   </head>
   <body>
     <h1>Form of User Info</h1>
-    <form action="/form" method="post" class="form">
+    <form action="/create" method="post" class="form">
       <div class="row">
         <label for="name">Name:</label><br />
         <input type="text" placeholder="" id="name" name="name" />
@@ -51,12 +51,12 @@
       <div class="row">
         <label for="loaction">Location:</label><br />
         <!-- <textarea placeholder="" id="loaction"></textarea> -->
-        <input type="text" placeholder="" id="location" name=""/>
+        <input type="text" placeholder="" id="location" name="location"/>
       </div>
       <div class="row">
         <label for="time">Photo taken on:</label><br />
         <!-- <textarea placeholder="" id="loaction"></textarea> -->
-        <input type="text" placeholder="" id="time" name="time" />
+        <input type="date" id="time" name="time" />
       </div>
       <!-- <div class="row">
             <label>
@@ -65,5 +65,17 @@
           </div> -->
       <input type="submit" value="Submit" />
     </form>
+    
+    <div>
+      <form action="/records" method="get" class="form">
+        <input type = "submit" value="show all records">
+      </form>
+    </div>
+    <div>
+      <form action="/search" method="get" class="form">
+        <input type="text" placeholder="" id="person" name="person">
+        <input type="submit" value="search by person name">
+      </form>
+    </div>
   </body>
 </html>
