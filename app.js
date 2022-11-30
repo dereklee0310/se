@@ -2,54 +2,55 @@
  * @Author: Derek Lee dereklee0310@gmail.com
  * @Date: 2022-11-25 12:19:36
  * @LastEditors: Derek Lee dereklee0310@gmail.com
- * @LastEditTime: 2022-11-27 18:23:06
+ * @LastEditTime: 2022-11-30 14:16:50
  * @FilePath: /se_test/app.js
  * @Description: 
  * 
  * Copyright (c) 2022 by Derek Lee dereklee0310@gmail.com, All Rights Reserved. 
  */
+
 const express = require('express')
 const mysql = require('mysql')
-const app = express()
-const port = 3000
 const bodyParser = require('body-parser');
 const { json } = require('body-parser');
+const app = express()
+app.set('view engine', 'pug')
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// start the server
+const port = 3000 // port for nodejs server
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`)
+})
+
+// create connection object
 var con = mysql.createConnection({
   host: "localhost",  
-  // port: 8889,
-  user: "root",
-  password: "1234",
-  database: "test"
+  port: 3306, // default port for mysql server
+  user: "root", // mysql user name
+  password: "1234", // mysql password
+  database: "test" // database name
 });
 
+// call connect method
 con.connect(function(err) {
-  console.log('enter')
   if (err) {
     return console.error('error: ' + err.message);
   }
-
   console.log('Connected to the MySQL server.');
 });
 
-
-// app.use("/", (req, res, next)=>{
-//   next();
-// });
-
+// home page (submit)
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+  res.render('test')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
+// submit page for testing
 app.post('/form', (req, res) => {
-    console.log(req.body);
-    res.sendFile(__dirname + '/index.html');
-  })
+  console.log(req.body);
+  // res.sendFile(__dirname + '/index.html');
+  res.render('test')
+})
 
 app.get('/records', (req, res) => {
   if(con.state === 'disconnected'){
@@ -63,8 +64,10 @@ app.get('/records', (req, res) => {
       // console.log(err)
       // 釋放連線
       // connection.release();
+
+      res.json(rows)
   });
-  res.sendFile(__dirname + '/tmp.html');
+  // res.sendFile(__dirname + '/tmp.html');
 })
 
 app.post('/create', (req, res) => {
@@ -96,4 +99,23 @@ app.get('/search', (req, res) => {
     console.log(results)
   });
   res.sendFile(__dirname + '/tmp.html');
+})
+
+app.post('/delete', (req, res) => {
+  if(con.state === 'disconnected'){
+    // return respond(null, { status: 'fail', message: 'server down'});
+    console.log('Server is disconnected from database');
+  }
+  con.query(`delete from Patients where Name = '${req.body.person}'`,
+  function(err, results){
+    if (err){ 
+      throw err;
+    }
+    console.log(results)
+  });
+  res.sendFile(__dirname + '/tmp.html');
+})
+
+app.get('/pug', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!'});
 })

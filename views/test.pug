@@ -1,0 +1,66 @@
+doctype html
+//
+  * @Author: dereklee0310 dereklee0310.gmail.com
+  * @Date: 2022-11-24 10:14:30
+  * @LastEditors: Derek Lee dereklee0310@gmail.com
+  * @LastEditTime: 2022-11-28 14:34:14
+  * @FilePath: /se_test/index.html
+  * @Description:
+  *
+  * Copyright (c) 2022 by dereklee0310 dereklee0310.gmail.com, All Rights Reserved.
+head
+  meta(charset='utf-8')
+  title Test Page
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  meta(name='description' content='HTML5 Example Page')
+  link(rel='stylesheet' href='/assets/css/stylesheet.css?v=1')
+h1 Form of User Info
+form.form(action='/create' method='post')
+  .row
+    label(for='name') Name:
+    br
+    input#name(type='text' placeholder='' name='name')
+  .row
+    label(for='age') Age:
+    br
+    input#age(type='text' placeholder='' name='age')
+  .row
+    // <label for="gender">Gender:</label><br />
+    | Gender:
+    br
+    input#male(type='radio' name='gender' value='male' checked='')
+    label(for='male') male
+  div
+    input#female(type='radio' name='gender' value='female')
+    label(for='female') female
+  div
+    input(type='radio' id='third gender' name='gender' value='third gender')
+    label(for='third gender') third gender
+  .row
+    label(for='loaction') Location:
+    br
+    // <textarea placeholder="" id="loaction"></textarea>
+    input#location(type='text' placeholder='' name='location')
+  .row
+    label(for='time') Photo taken on:
+    br
+    // <textarea placeholder="" id="loaction"></textarea>
+    input#time(type='date' name='time')
+  //
+    <div class="row">
+    <label>
+    <input type="checkbox" id="exampleConfirmation"><span>Confirmation</span>
+    </label>
+    </div>
+  input(type='submit' value='Submit')
+div
+  form.form(action='/records' method='get')
+    input(type='submit' value='show all records')
+div
+  form.form(action='/search' method='get')
+    input#person(type='text' placeholder='' name='person')
+    input(type='submit' value='search by person name')
+div
+  form.form(action='/delete' method='post')
+    input#person(type='text' placeholder='' name='person')
+    input(type='submit' value='delete by person name')
