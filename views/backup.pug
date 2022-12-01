@@ -1,0 +1,48 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  meta(name='description' content='')
+  meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+  meta(name='generator' content='Hugo 0.84.0')
+  title Signin Template &middot; Bootstrap v5.0
+  link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
+  // Bootstrap core CSS
+  link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
+  style.
+    .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    }
+    @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+    }
+    }
+  // Custom styles for this template
+  link(href='css/signin.css' rel='stylesheet')
+
+  // after convert html to pug, the body tag disappear
+  // add "body.text-center", otherwise the elements in form will not be aligned
+body.text-center
+  main.form-signin
+    form
+      // img.mb-4(src='/assets/brand/bootstrap-logo.svg' alt='' width='72' height='57')
+      img.mb-4(src='/images/logo.png' alt='')
+      // h1.h3.mb-3.fw-normal 歡迎
+      .form-floating
+        input#floatingInput.form-control(type='email' placeholder='name@example.com')
+        label(for='floatingInput') Email address
+      .form-floating
+        input#floatingPassword.form-control(type='password' placeholder='Password')
+        label(for='floatingPassword') Password
+      // .checkbox.mb-3
+        label
+          input(type='checkbox' value='remember-me')
+          |  保持登入狀態
+          
+      button.w-100.btn.btn-lg.btn-primary(type='submit') 登入
+    //-   p.mt-5.mb-3.text-muted &copy; 2017&ndash;2021
