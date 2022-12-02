@@ -28,20 +28,24 @@ body {
 
 .form-signin input[type="email"] {
   margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  /* border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; */
+  border-radius: 20px;
 }
 
 .form-signin input[type="password"] {
   margin-top: 10px;
   margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  /* border-top-left-radius: 0;
+  border-top-right-radius: 0; */
+  border-radius: 20px;
 }
 
 /* add this to create a round effect on corners */
 .mb-4 {
-  border-radius: 5%
+  border-radius: 16%;
+  /* width: 156px;
+  height: 156px; */
 }
 
 .fgpwd {
@@ -51,4 +55,8 @@ body {
 
 .checkbox.mb-3 {
   float:left;
+}
+
+.w-100 {
+  border-radius: 20px;
 }
