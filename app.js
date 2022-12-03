@@ -2,8 +2,8 @@
  * @Author: Derek Lee dereklee0310@gmail.com
  * @Date: 2022-11-25 12:19:36
  * @LastEditors: Derek Lee dereklee0310@gmail.com
- * @LastEditTime: 2022-11-30 14:16:50
- * @FilePath: /se_test/app.js
+ * @LastEditTime: 2022-12-03 16:19:30
+ * @FilePath: /se/app.js
  * @Description:
  *
  * Copyright (c) 2022 by Derek Lee dereklee0310@gmail.com, All Rights Reserved.
@@ -73,6 +73,13 @@ app.get("/", (req, res) => {
   res.redirect("/account");
 });
 
+
+app.post("/change_pwd", (req, res) => {
+  //! need to access database
+  //! should use a popout instead of new page
+  res.render("recover_success");
+});
+
 //! original test for database operation!
 app.get("/form", (req, res) => {
   // console.log(req.body);
@@ -80,11 +87,10 @@ app.get("/form", (req, res) => {
   res.render("test");
 });
 
-app.post("/change_pwd", (req, res) => {
-  //! need to access database
-  //! should use a popout instead of new page
-  res.render("recover_success");
-});
+app.get('/upload', (req, res) => {
+  res.render('upload')
+})
+
 
 app.get("/records", (req, res) => {
   if (con.state === "disconnected") {
