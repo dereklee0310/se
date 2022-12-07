@@ -29,12 +29,17 @@ head
   // add "body.text-center", otherwise the elements in form will not be aligned
 body.text-center
   main.form-signin
-    form(action="./verify" method="post")
+    form(action="./login" method="post")
       // img.mb-4(src='/assets/brand/bootstrap-logo.svg' alt='' width='72' height='57')
       img.mb-4(src='/images/logo.png' alt='')
       //- h1.h4.mb-3.fw-normal 請登入
+      //- put warning here
+      if msg === 'failed'
+        .alert.alert-danger
+          strong 帳號或密碼錯誤!
+        //- div 請檢查您的帳戶名稱和密碼後再試一次
       .form-floating
-        input#floatingInput.form-control(type='email' placeholder='name@example.com' name="email" required)
+        input#floatingInput.form-control(type='email' placeholder='name@example.com' name="account" required)
         label(for='floatingInput') Email address
       .form-floating
         input#floatingPassword.form-control(type='password' placeholder='Password' name="password" required)
@@ -45,6 +50,6 @@ body.text-center
           |  保持登入狀態
       a(href='./recover').fgpwd 忘記密碼？
       button.w-100.btn.btn-lg.btn-primary(type='submit') 登入
-      | 還沒有帳號嗎?&middot;
+      | 還沒有帳號嗎?
       a(href='./register') 註冊
     //-   p.mt-5.mb-3.text-muted &copy; 2017&ndash;2021
