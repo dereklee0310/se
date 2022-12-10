@@ -66,10 +66,6 @@ router.post("/login", (req, res) => {
   );
 });
 
-router.get("/signup", (req, res) => {
-  res.send("for signup");
-});
-
 router.post("/signup", (req, res) => {
   hash_val = bcrypt.hashSync(req.body.password, 10); //todo change this into async
   pool.query(
@@ -94,12 +90,12 @@ router.get("/password", (req, res) => {
   res.render("password");
 });
 
-router.get("/register", (req, res) => {
-  res.render("register"); //todo
+router.get("/signup", (req, res) => {
+  res.render("signup"); //todo
 });
 
-router.get("/personal_info", (req, res) => {
-  res.render("personal_info"); //todo
+router.get("/info", (req, res) => {
+  res.render("info"); //todo
 });
 
 module.exports = router;
