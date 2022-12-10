@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-const { sql, pool } = require("./modules/db");
+// const { sql, pool } = require("./modules/db");
 const passport = require("passport");
 const strategy = require("passport-local");
 const app = express();
@@ -61,6 +61,10 @@ app.get("/form", (req, res) => {
 // app.get('/upload', (req, res) => {
 //   res.render('upload')
 // })
+
+app.get("/history", (req, res) => {
+  res.render("history");
+});
 
 app.get("/records", (req, res) => {
   if (pool.state === "disconnected") {

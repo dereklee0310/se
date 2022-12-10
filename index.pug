@@ -55,36 +55,36 @@ head
     -webkit-overflow-scrolling: touch;
     }
   // Custom styles for this template
-  link(href='/css/index.css' rel='stylesheet')
+  link(href='/css/carousel.css' rel='stylesheet')
 header
   nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
     .container-fluid
-      a.navbar-brand(href='/') 首頁
+      a.navbar-brand(href='/') &#x9996;&#x9801;
       #navbarCollapse.collapse.navbar-collapse
         ul.navbar-nav.me-auto.mb-2.mb-md-0
           li.nav-item
-            a.nav-link(aria-current='page' href='/upload') 開始檢測
+            a.nav-link.active(aria-current='page' href='/upload') &#x4E0A;&#x50B3;&#x6AA2;&#x6E2C;&#x5F71;&#x7247;
           li.nav-item
-            a.nav-link(href='/history') 檢測紀錄
-          li.nav-item
-            a.nav-link(href='/aboutus') 關於我們
-        ul#hello.nav-item.dropdown.mb-2.mb-md-0(style='display: block;')
-          button.btn.btn-dark.nav-light.dropdown-toggle.btn-outline-secondary(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
-            | OOO&#x4F60;&#x597D;
+            a.nav-link(href='/aboutus') aboutus
+        ul.nav-item.dropdown
+          button.btn.btn-link.nav-link.py-2.px-0.px-lg-2.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
+            span.d-lg-none(aria-hidden='true') Bootstrap
+            span.visually-hidden Bootstrap&nbsp;
+            |  OOO&#x4F60;&#x597D; 
+            span.visually-hidden (switch to other versions)
           ul.dropdown-menu.dropdown-menu-end
             li
-              a.dropdown-item(href='/personalpage') 個人資料
+              a.dropdown-item(href='/account/personal_info') &#x500B;&#x4EBA;&#x8CC7;&#x6599;
             li
-              a.dropdown-item(href='/history') 檢測紀錄
+              a.dropdown-item(href='/history') &#x6B77;&#x53F2;&#x4E0A;&#x50B3;
             li
+              a.dropdown-item(href='/patient') &#x75C5;&#x60A3;&#x8CC7;&#x6599;
+            li
+              //! might cause problem here...
               a.dropdown-item(href='/account/password') 變更密碼
-            //- li
-            //-   a.dropdown-item(href='/patient') 病患資料
-            li#logout(style='display: block;')
-              input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/')
-        ul#login.nav-item.mb-2.mb-md-0(style='display: block;')
-          button.btn.btn-dark.nav-light.btn-outline-secondary(type='button' onclick="location.href='/login'" aria-expanded='false' data-bs-display='static')
-            | &#x767B;&#x5165;
+            li
+              //! might cause problem here...
+              a.dropdown-item(href='/patient') 登出
 main
   #myCarousel.carousel.slide(data-bs-ride='true')
     .carousel-indicators
@@ -131,38 +131,38 @@ main
   // Wrap the rest of the page in another container to center all the content.
   .container.marketing
     // Three columns of text below the carousel
-    .row.row-cols-3
-      .col.border.border-secondary.border-4(style='border-radius: 40px;')
+    .row
+      .col-lg-4
         svg.bd-placeholder-img.rounded-circle(width='140' height='140' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 140x140' preserveaspectratio='xMidYMid slice' focusable='false')
           title Placeholder
           rect(width='100%' height='100%' fill='#777')
           text(x='50%' y='50%' fill='#777' dy='.3em') 140x140
-        h2.fw-normal 上傳檢測影片
+        h2.fw-normal Heading
         p
           | Some representative placeholder content for the three columns of text below the carousel. This is the first column.
         p
-          a.btn.btn-secondary.btn-lg(href='/upload') 開始上傳影片 &raquo;
+          a.btn.btn-secondary(href='#') View details &raquo;
       // /.col-lg-4
-      .col.border.border-secondary.border-4(style='border-radius: 40px;')
+      .col-lg-4
         svg.bd-placeholder-img.rounded-circle(width='140' height='140' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 140x140' preserveaspectratio='xMidYMid slice' focusable='false')
           title Placeholder
           rect(width='100%' height='100%' fill='#777')
           text(x='50%' y='50%' fill='#777' dy='.3em') 140x140
-        h2.fw-normal 檢視歷史上傳
+        h2.fw-normal Heading
         p
           | Another exciting bit of representative placeholder content. This time, we&apos;ve moved on to the second column.
         p
-          a.btn.btn-secondary.btn-lg(href='/history') 查看檢測紀錄 &raquo;
+          a.btn.btn-secondary(href='#') View details &raquo;
       // /.col-lg-4
-      .col.border.border-secondary.border-4(style='border-radius: 40px;')
+      .col-lg-4
         svg.bd-placeholder-img.rounded-circle(width='140' height='140' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 140x140' preserveaspectratio='xMidYMid slice' focusable='false')
           title Placeholder
           rect(width='100%' height='100%' fill='#777')
           text(x='50%' y='50%' fill='#777' dy='.3em') 140x140
-        h2.fw-normal 關於我們
+        h2.fw-normal Heading
         p And lastly this, the third column of representative placeholder content.
         p
-          a.btn.btn-secondary.btn-lg(href='aboutus') 更多資訊 &raquo;
+          a.btn.btn-secondary(href='#') View details &raquo;
       // /.col-lg-4
     // /.row
     // START THE FEATURETTES
@@ -213,32 +213,9 @@ main
     p.float-end
       a(href='#') Back to top
     p
-      | &copy; 2022 CCU CSIE.All rights reserved &middot; 
+      | &copy; 2017&ndash;2022 Company, Inc. &middot; 
       a(href='#') Privacy
       |  &middot; 
       a(href='#') Terms
 script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous')
 script(src='https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js')
-script.
-  var login = 1;
-  function showNarbar(){
-  var element1 = document.getElementById("hello");
-  var element2 = document.getElementById("login");
-  var element3 = document.getElementById("logout");
-  if(login == 1){
-  element1.style.display = "block";
-  element2.style.display = "none";
-  element3.style.display = "block";
-  }else{
-  element1.style.display = "none";
-  element2.style.display = "block";
-  element3.style.display = "none";
-  }
-  }
-  showNarbar();
-script.
-  function Buttontoggle(){
-  var t = document.getElementById("logout");
-  login = 0;
-  if(login == 0) showNarbar();
-  }
