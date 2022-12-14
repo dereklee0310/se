@@ -456,8 +456,43 @@ function getValidEnumValue(enumType, keyOrValue)
  **/
 function goToNextStep(wizard, options, state)
 {
-    return paginationClick(wizard, options, state, increaseCurrentIndexBy(state, 1));
-}
+    if(state.currentIndex == 0)
+    {
+        var fname = $(first_name).val();
+        var lname = $(last_name).val();
+        var ph = $(phone).val();
+        var humanid = $(id).val();
+        var addr = $(address).val();
+        var date = $(birth).val();
+        fname = $.trim(fname);
+        lname = $.trim(lname);
+        ph = $.trim(ph);
+        humanid = $.trim(humanid);
+        addr = $.trim(addr);
+        date = $.trim(date);
+
+        if(fname == '' || lname == '' || ph == '' || humanid == '' || addr == '' || date == '')
+        {
+            alert('輸入不能為空');
+        }
+        else
+        {
+            return paginationClick(wizard, options, state, increaseCurrentIndexBy(state, 1));
+        }
+    }
+    else if(state.currentIndex == 1)
+    {
+        var date = $(day).val();
+        date = $.trim(date);
+        if(date == '')
+        {
+            alert('輸入不能為空');
+        }
+        else
+        {
+            return paginationClick(wizard, options, state, increaseCurrentIndexBy(state, 1));
+        }
+    }}
 
 /**
  * Routes to the previous step.
@@ -822,6 +857,7 @@ function refreshPagination(wizard, options, state)
     if (options.enablePagination)
     {
         var finish = wizard.find(".actions a[href$='#finish']").parent(),
+            //previous = wizard.find(".actions a[href$='#previous']").parent(),
             next = wizard.find(".actions a[href$='#next']").parent();
 
         if (!options.forceMoveForward)
@@ -834,12 +870,14 @@ function refreshPagination(wizard, options, state)
         {
             finish._enableAria(state.stepCount > 0);
             next._enableAria(state.stepCount > 1 && state.stepCount > (state.currentIndex + 1));
+            previous._enableAria(state.stepCount > 1 && state.stepCount < (state.currentIndex + 2));
         }
         else
         {
             finish._showAria(options.enableFinishButton && state.stepCount === (state.currentIndex + 1));
             next._showAria(state.stepCount === 0 || state.stepCount > (state.currentIndex + 1)).
                 _enableAria(state.stepCount > (state.currentIndex + 1) || !options.enableFinishButton);
+            previous._showAria(state.stepCount  === (state.currentIndex +2)||(options.enableFinishButton && state.stepCount === (state.currentIndex + 1)));
         }
     }
 }
@@ -1055,15 +1093,16 @@ function renderPagination(wizard, options, state)
     if (options.enablePagination)
     {
         var pagination = "<{0} class=\"actions {1}\"><ul role=\"menu\" aria-label=\"{2}\">{3}</ul></{0}>",
-            buttonTemplate = "<li><a href=\"#{0}\" role=\"menuitem\">{1}</a></li>",
+            buttonTemplate = "<li><a href=\"#{0}\" role=\"menuitem\"align=\"center\" valign=\"center\" >{1}</a></li>",
             buttons = "";
 
-        if (!options.forceMoveForward)
+        /*if (!options.forceMoveForward)
         {
             buttons += buttonTemplate.format("previous", options.labels.previous);
-        }
+        }*/
 
         buttons += buttonTemplate.format("next", options.labels.next);
+        buttons += buttonTemplate.format("previous", options.labels.previous);
 
         if (options.enableFinishButton)
         {
@@ -1469,7 +1508,7 @@ $.fn.steps.setStep = function (index, step)
  * @param count {Integer} The amount of steps that should be skipped
  * @return {Boolean} Indicates whether the action executed
  **/
-$.fn.steps.skip = function (count)
+$.fn.steps.skip = function (_count)
 {
     throw new Error("Not yet implemented!");
 };

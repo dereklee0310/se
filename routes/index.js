@@ -4,6 +4,7 @@ const router = express.Router();
 // the routing here will be home/...
 
 router.get("/", (req, res) => {
+  // todo use isauthenticated here
   res.render("index");
 });
 

@@ -1,5 +1,52 @@
-html
-  head
-    title 用戶資訊 | 帕金森氏症雲端檢測服務
-  body
-    h1 Put personal info here
+doctype html
+head
+	meta(charset='utf-8')
+	meta(name='viewport' content='width=device-width, initial-scale=1')
+	meta(name='description' content='')
+	meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+	meta(name='generator' content='Hugo 0.84.0')
+	title 註冊 | 帕金森氏症雲端檢測服務
+	link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
+	// Bootstrap core CSS
+	link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
+	style.
+		.bd-placeholder-img {
+		font-size: 1.125rem;
+		text-anchor: middle;s
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		user-select: none;
+		}
+		@media (min-width: 768px) {
+		.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+		}
+		}
+	// Custom styles for this template
+	link(href='/css/info.css' rel='stylesheet')
+
+	// after convert html to pug, the body tag disappear
+	// add "body.text-center", otherwise the elements in form will not be aligned
+	body.text-center
+		main.form-register
+			form(action='#' method='post')
+				h1.h4.mb-3.fw-normal 用戶資訊
+				.form-floating.name1
+					input#name1.form-control(type='text' placeholder='name1' name='name1' disabled='')
+					label(for='name1') 姓
+				.form-floating.name2
+					input#name2.form-control(type='text' placeholder='name2' name='name2' disabled='')
+					label(for='name2') 名
+				.form-floating
+					input#ID.form-control(type='text' placeholder='ID' name='ID' disabled='')
+					label(for='ID') 身分證字號
+				.form-floating
+					input#gender.form-control(type='text' placeholder='gender' name='gender' disabled='')
+					label(for='birthday') 性別
+				.form-floating
+					input#birthday.form-control(type='text' placeholder='birthday' name='birthday' disabled='')
+					label(for='birthday') 生日
+				.form-floating
+					input#email.form-control(type='email' placeholder='email' name='email' disabled='')
+					label(for='email') 信箱地址
+				a.btn.cancel.btn-lg.btn-primary(href='#') 返回

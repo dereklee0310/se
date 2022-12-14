@@ -27,27 +27,34 @@ head
 
 	// after convert html to pug, the body tag disappear
 	// add "body.text-center", otherwise the elements in form will not be aligned
-body.text-center
+	body.text-center
 		main.form-register
-			form(action='./account/register', method='post')
+			form(action='./account/signup' method='post')
 				h1.h4.mb-3.fw-normal 註冊
+				.form-floating.name1
+					input#name1.form-control(type='text' placeholder='name1' name='name1' required='')
+					label(for='name1') 姓
+				.form-floating.name2
+					input#name2.form-control(type='text' placeholder='name2' name='name2' required='')
+					label(for='name2') 名
 				.form-floating
-					input#name.form-control(type='text', placeholder='name', name='name', required)
-					label(for='name') 姓名
-				.form-floating
-					input#ID.form-control(type='text', placeholder='ID', name='ID', required)
+					input#ID.form-control(type='text' placeholder='ID' name='ID' required='')
 					label(for='ID') 身分證字號
 				.form-floating
-					input#birthday.form-control(type='date', placeholder='birthday', name='birthday', required)
-					label(for='birthday') 生日
+					select#gender.form-control(name='gender' required='')
+						option(value='' disabled='disabled' selected='true') 請選擇您的性別
+						option(value='female') 男
+						option(value='male') 女
+						option(value='other') 其他
+					label(for='birthday') 性別
 				.form-floating
-					input#email.form-control(type='email', placeholder='email', name='email', required)
-					label(for='email') 信箱地址
+					input#birthday.form-control(type='date' placeholder='birthday' name='birthday' required='')
+					label(for='birthday') 出生年月日
 				.form-floating
-					input#password.form-control(type='password', placeholder='Password', name='password', required)
+					input#email.form-control(type='email' placeholder='email' name='email' required='')
+					label(for='email') 電子郵件
+				.form-floating
+					input#password.form-control(type='password' placeholder='Password' name='password' required='')
 					label(for='password') 密碼
-				.form-floating
-					input#confirmpassword.form-control(type='password', placeholder='Confirm password', name='confirm password', required)
-					label(for='confirmpassword') 密碼確認
-				a.btn.cancel.btn-lg.btn-primary(href="/account/login") 取消
+				a.btn.cancel.btn-lg.btn-primary(href='/account/login') 取消
 				button.btn.chg.btn-lg.btn-primary(type='submit') 註冊

@@ -6,34 +6,56 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const strategy = require("passport-local");
 
+const bodyParser = require('body-parser');
+const session = require('express-session')
+
 const {sql, pool} = require('../modules/db');
+// const app = require("../app");
 
 passport.use(new strategy(
   // 當請 passport 用此驗證機制驗證時，處理驗證邏輯的 code...
   {
     usernameField: 'account',
     passwordField: 'password',
-    passReqtoCallback: true
+    // passReqtoCallback: true
   },
-  function(username, password, done) {
+  function(account, password, done) {
     pool.query(
-      `select password from users where account = '${username}'`,
+      `select password from users where account = '${account}'`,
       function (err, results) {
         if (err)
-          throw err;
+          return done(err);
         if (Object.keys(results).length === 0) {
-          res.render('login', {msg: 'failed'})
-          return
+          return done(null, false)
         }
   
         if (bcrypt.compareSync(password, results[0].password)) //todo change this into async
-          res.redirect('/');
+          return done(null, results[0])
         else
-          res.redirect('login?loginFailed=true')
+          return done(null, false)
       }
     );
   }
 ))
+
+passport.serializeUser(function(user, done) {
+  done(null, user)
+})
+
+passport.deserializeUser(function(user, done) {
+  done(null, user)
+})
+
+router.use(session({
+  secret: 'roottoor',
+  resave: 'false',
+  saveUninitialized: 'false'
+}))
+
+router.use(bodyParser.urlencoded({ extended: true }));
+
+router.use(passport.initialize())
+router.use(passport.session())
 
 // these router are under the path /account/...
 router.get("/", (req, res) => {
@@ -41,30 +63,19 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  if (req.query.loginFailed === 'true')
+  console.log(req.session.status)
+  // if (req.query.loginFailed === 'true')
+  if(req.session.status === 'loginFailed')
     res.render('login', {msg: 'failed'});
   else
     res.render('login')
 });
 
-router.post("/login", (req, res) => {
-  pool.query(
-    `select password from users where account = '${req.body.account}'`,
-    function (err, results) {
-      if (err)
-        throw err;
-      if (Object.keys(results).length === 0) {
-        res.render('login', {msg: 'failed'})
-        return
-      }
-
-      if (bcrypt.compareSync(req.body.password, results[0].password)) //todo change this into async
-        res.redirect('/');
-      else
-        res.redirect('login?loginFailed=true')
-    }
-  );
-});
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  // failureRedirect: '/account/login?loginFailed=true'
+  failureRedirect: '/account/login'
+}))
 
 router.post("/signup", (req, res) => {
   hash_val = bcrypt.hashSync(req.body.password, 10); //todo change this into async
@@ -87,6 +98,8 @@ router.get("/recover", (req, res) => {
 });
 
 router.get("/password", (req, res) => {
+  if (req.isAuthenticated())
+    console.log('hello')
   res.render("password");
 });
 
@@ -97,5 +110,13 @@ router.get("/signup", (req, res) => {
 router.get("/info", (req, res) => {
   res.render("info"); //todo
 });
+
+router.get('/logout', function(req, res, next) {
+  req.logOut(function(err) {
+    if(err)
+      return next(err);
+    res.redirect('/') //todo test this
+  })
+})
 
 module.exports = router;

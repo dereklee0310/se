@@ -30,8 +30,6 @@ body {
   border-radius: 20px;
 }
 
-
-/* todo this must be modified */
 .name1 {
   width: 30%;
   display:inline-block;
@@ -49,13 +47,5 @@ body {
 }
 
 .cancel {
-  float: left;
-}
-
-.chg {
-  float: right;
-}
-
-#gender {
-  border-radius: 20px;
+  align-items: center;
 }

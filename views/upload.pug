@@ -30,7 +30,7 @@ head
               .form-row
                 .form-holder
                   label.form-row-inner
-                    input#first_name.form-control(type='text' name='first_name' required='' )
+                    input#first_name.form-control(type='text' name='first_name' required='true' )
                     span.label 名 (First Name)
                 .form-holder
                   label.form-row-inner
@@ -43,13 +43,23 @@ head
                     span.label 電話 (Phone Number)
                 .form-holder
                   label.form-row-inner
-                    input#your_email_1.form-control(type='text' name='your_email_1' required='')
-                    span.label E-Mail
+                    input#id.form-control(type='text' name='id' required='')
+                    span.label 身分證字號 (ID)
+              .form-row
+                .form-holder
+                  label.form-row-inner
+                    label.special-label(for='gender') 性別 (Gender):
+                    select#gender.form-control(name='gender')
+                      option(value='男' selected='') 男
+                      option(value='女') 女
+                .form-holder
+                  label.special-label-1(for='birth') 出生年月日 (Birthday)
+                  input#birth.day(type='text' name='birth' placeholder='請選擇日期')
               .form-row
                 .form-holder.form-holder-2
                   label.form-row-inner
                     input#address.form-control(type='text' name='address' required='')
-                    span.label 家庭地址 (Address)
+                    span.label 拍攝地址 (Location)
           // SECTION 2
           h2
             p.step-icon
@@ -73,11 +83,11 @@ head
               .form-row
                 .form-holder.form-holder-2
                   label.special-label-1(for='day') 上傳日期 (Upload Date)
-                  input#day.day(type='text' name='day' placeholder='January - 01 - 2022')
+                  input#day.day(type='text' name='day' placeholder='請選擇日期')
               .form-row
                 .form-holder.form-holder-2
-                  label.special-label-1(for='file') 選擇影片 (Choose File)
-                  input#video_file.filestyle(type='file' name='file' accept='video/x-msvideo,video/mp4,video/quicktime' required)
+                  label.special-label-1(for='video') 選擇影片 (Choose Video)
+                  input#video_file.filestyle(type='file' name='video' accept='video/x-msvideo,video/mp4,video/quicktime' required)
           // SECTION 3
           h2
             p.step-icon
@@ -94,6 +104,21 @@ head
                     tr.space-row
                       th 全名 (Full Name):
                       td#fullname-val
+                    tr.space-row
+                      th 電話 (Phone Number):
+                      td#phone-val
+                    tr.space-row
+                      th 性別 (Gender):
+                      td#gender-val
+                    tr.space-row
+                      th 身分證字號 (ID):
+                      td#id-val
+                    tr.space-row
+                      th 出生年月日 (Birthday):
+                      td#birth-val
+                    tr.space-row
+                      th 拍攝地址 (Location):
+                      td#address-val
                     tr.space-row
                       th 檢測項目 (Types):
                       td#types-val

@@ -9,6 +9,7 @@ const app = express();
 app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+const flash = require('connect-flash');
 
 require("dotenv").config();
 
@@ -21,6 +22,11 @@ app.use("/account", account);
 app.use("/home", home);
 app.use("/upload", upload);
 app.use("/aboutus", aboutus);
+app.use(flash())
+
+app.get('/test', (req, res) => {
+  // req.flash('oooops') // todo set this up
+})
 
 // start the server
 app.listen(process.env.APP_PORT, () => {
@@ -48,7 +54,9 @@ app.listen(process.env.APP_PORT, () => {
 
 // redirect to home page
 app.get("/", (req, res) => {
-  res.redirect("/home");
+  res.redirect("/home?login=false");
+  // if (req.isAuthenticated())
+  //   console.log('hello')
 });
 
 //! original test for database operation!
