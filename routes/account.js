@@ -10,11 +10,17 @@ const bodyParser = require('body-parser');
 const session = require('express-session')
 
 const {sql, pool} = require('../modules/db');
-// const app = require("../app");
 
-passport.use(new strategy(
-  // 當請 passport 用此驗證機制驗證時，處理驗證邏輯的 code...
-  {
+const ensureAuthenticated = require('../modules/authen').ensureAuthenticated;
+
+
+// function ensureAuthenticated(req, res, next) {
+//   if (req.isAuthenticated())
+//     return next()
+//   res.redirect('/account/login/?loginNeeded=true')
+// }
+
+passport.use(new strategy({
     usernameField: 'account',
     passwordField: 'password',
     // passReqtoCallback: true
@@ -53,7 +59,6 @@ router.use(session({
 }))
 
 router.use(bodyParser.urlencoded({ extended: true }));
-
 router.use(passport.initialize())
 router.use(passport.session())
 
@@ -63,18 +68,20 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  console.log(req.session.status)
-  // if (req.query.loginFailed === 'true')
-  if(req.session.status === 'loginFailed')
-    res.render('login', {msg: 'failed'});
+  // console.log(req.session.status)
+  if (req.query.loginFailed === 'true')
+  // if(req.session.status === 'loginFailed')
+    res.render('login', {msg: 'loginFailed'});
+  else if (req.query.loginNeeded === 'true')
+    res.render('login', {msg: 'loginNeeded'})
   else
     res.render('login')
 });
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  // failureRedirect: '/account/login?loginFailed=true'
-  failureRedirect: '/account/login'
+  successRedirect: '/home',
+  failureRedirect: '/account/login?loginFailed=true'
+  // failureRedirect: '/account/login'
 }))
 
 router.post("/signup", (req, res) => {
@@ -97,9 +104,7 @@ router.get("/recover", (req, res) => {
   res.render("recover"); //todo
 });
 
-router.get("/password", (req, res) => {
-  if (req.isAuthenticated())
-    console.log('hello')
+router.get("/password", ensureAuthenticated, (req, res) => {
   res.render("password");
 });
 
@@ -107,11 +112,11 @@ router.get("/signup", (req, res) => {
   res.render("signup"); //todo
 });
 
-router.get("/info", (req, res) => {
+router.get("/info", ensureAuthenticated, (req, res) => {
   res.render("info"); //todo
 });
 
-router.get('/logout', function(req, res, next) {
+router.get('/logout', ensureAuthenticated, function(req, res, next) {
   req.logOut(function(err) {
     if(err)
       return next(err);

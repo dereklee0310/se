@@ -106,10 +106,11 @@ body {
     -ms-outline: none;
     -moz-outline: none;
     -webkit-outline: none;
+    vertical-align: middle;
 }
 .form-register .steps li a .title {
 	display: flex;
-	display: -webkit-flex;
+    display: -webkit-flex;
 }
 .form-register .steps li a .title .step-icon { 
     position: relative;
@@ -146,7 +147,7 @@ body {
 .form-register .steps li.current a:active .step-icon,
 .form-register .steps li.done a .step-icon,
 .form-register .steps li.done a:active .step-icon {
-	background: #55e8d5;
+    background: #55e8d5;
 }
 .form-register .steps li a .step-text {
 	color: #333;
@@ -369,7 +370,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	padding-bottom: 25px;
 }
 .form-register .actions {
-	padding: 0 45px 45px;
+    padding: 0 45px 45px;
 }
 .actions ul {
 	list-style: none;
@@ -385,7 +386,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 .actions ul li.disabled,
 .actions ul li:first-child {
-	display: none;
+	display: inline-flex;
 }
 .actions ul li {
 	padding: 0;
@@ -403,6 +404,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     -ms-align-items: center;
     -moz-align-items: center;
     -webkit-align-items: center;
+    vertical-align: middle;
     border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px;
@@ -420,6 +422,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	color: #fff;
 	text-decoration: none;
     padding: 11px 55px;
+    vertical-align: middle;
 }
 
 
@@ -438,7 +441,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 		-o-align-items: center;
 		-ms-align-items: center;
 		-moz-align-items: center;
-		-webkit-align-items: center;
+        -webkit-align-items: center;
+        vertical-align: middle;
 	}
 	.form-register .steps li a .title .step-icon {
 		border-top-left-radius: 0;
@@ -446,7 +450,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	}
 	.form-register .steps li a .step-text {
 		padding-bottom: 20px;
-		padding-left: 0;
+        padding-left: 0;
+        vertical-align: middle;
 	}
 	.inner .form-row.form-row-date .form-holder select,
 	.inner .form-row.form-row-date .form-holder select#year {
