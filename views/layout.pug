@@ -1,88 +1,93 @@
-head
-  meta(charset='utf-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1')
-  meta(name='description' content='')
-  meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
-  meta(name='generator' content='Hugo 0.84.0')
-  title Carousel Template &middot; Bootstrap v5.2
-  link(rel='canonical' href='https://getbootstrap.com/docs/5.2/examples/carousel/')
-  // Bootstrap core CSS
-  link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
-  style.
-    .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    }
-    @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-    }
-    }
-    .b-example-divider {
-    height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
-    border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-    .b-example-vr {
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 100vh;
-    }
-    .bi {
-    vertical-align: -.125em;
-    fill: currentColor;
-    }
-    .nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
-    }
-    .nav-scroller .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: 1rem;
-    margin-top: -1px;
-    overflow-x: auto;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    }
-  // Custom styles for this template
-  link(href='/css/index.css' rel='stylesheet')
-header
-  nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
-    .container-fluid
-      a.navbar-brand(href='/') &#x9996;&#x9801;
-      #navbarCollapse.collapse.navbar-collapse
-        ul.navbar-nav.me-auto.mb-2.mb-md-0
-          li.nav-item
-            a.nav-link.active(aria-current='page' href='/form') &#x4E0A;&#x50B3;&#x6AA2;&#x6E2C;&#x5F71;&#x7247;
-          li.nav-item
-            a.nav-link(href='/history') &#x6B77;&#x53F2;&#x4E0A;&#x50B3;
-          li.nav-item
-            a.nav-link(href='#aboutus') aboutus
-        ul#hello.nav-item.dropdown.mb-2.mb-md-0(style='display: block;')
-          button.btn.btn-dark.nav-light.dropdown-toggle.btn-outline-secondary(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
-            | OOO&#x4F60;&#x597D;
-          ul.dropdown-menu.dropdown-menu-end
-            li
-              a.dropdown-item(href='/personalpage') &#x500B;&#x4EBA;&#x8CC7;&#x6599;
-            li
-              a.dropdown-item(href='/history') &#x6B77;&#x53F2;&#x4E0A;&#x50B3;
-            li
-              a.dropdown-item(href='/patient') &#x75C5;&#x60A3;&#x8CC7;&#x6599;
-            li#logout(style='display: block;')
-              input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/')
-        ul#login.nav-item.mb-2.mb-md-0(style='display: block;')
-          button.btn.btn-dark.nav-light.btn-outline-secondary(type='button' onclick="location.href='/login'" aria-expanded='false' data-bs-display='static')
-            | &#x767B;&#x5165;
-footer.container.bg-light
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='description' content='')
+    meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+    meta(name='generator' content='Hugo 0.84.0')
+    // Bootstrap core CSS
+    link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
+    block head
+    style.
+      .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      }
+      @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+      }
+      }
+      .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+      .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+      }
+      .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+      }
+      .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+      }
+      .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      }
+    block title
+  
+  header
+    nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+      .container-fluid
+        a.navbar-brand(href='/')
+          img(src='images/logo.png' width='30' height='30' style='border-radius: 10px;')
+        #navbarCollapse.collapse.navbar-collapse
+          ul.navbar-nav.me-auto.mb-2.mb-md-0.px-3
+            li.nav-item.px-3
+              a.nav-link(aria-current='page' href='/upload') 開始檢測
+            li.nav-item.px-3
+              a.nav-link(href='/history') 檢測紀錄
+            li.nav-item.px-3
+              a.nav-link(href='#aboutus') 關於我們
+          ul#hello.nav-item.dropdown.mb-2.mb-md-0(style='display: block;')
+            button.btn.btn-dark.nav-light.dropdown-toggle.btn-outline-secondary(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
+              | OOO&#x4F60;&#x597D;
+            ul.dropdown-menu.dropdown-menu-end
+              li
+                a.dropdown-item(href='/account/info') 個人資料
+              li
+                a.dropdown-item(href='/history') 檢測紀錄
+              li
+                a.dropdown-item(href='/account/password') 變更密碼
+              //- li
+              //-   a.dropdown-item(href='/patient') 病患資料
+              li#logout(style='display: block;')
+                input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/account/logout')
+          ul#login.nav-item.mb-2.mb-md-0(style='display: block;')
+            button.btn.btn-dark.nav-light.btn-outline-secondary(type='button' onclick="location.href='/login'" aria-expanded='false' data-bs-display='static')
+              | &#x767B;&#x5165;
+  main
+    block content
+  footer.container.bg-light.footer
     p.float-end
       a(href='#') Back to top
     p

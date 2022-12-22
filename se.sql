@@ -42,32 +42,34 @@ INSERT INTO `upload_records` VALUES ('Bob',25,'male','home1','2022-11-27'),('Dav
 UNLOCK TABLES;
 
 --
--- Table structure for table `users`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `account` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `birth` date NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `pid` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `birth` varchar(255) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (7,'root@gmail.com','$2b$10$spR2P33Xs6X2PrQ/7Ebh7OuhU34eniMy6e2QsA2w.3KVo9jz0uPd6','root_f','root_l','2022-12-05','2022-12-05 03:58:18');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (4,'明翰','李','dereklee0310@gmail.com','$2b$10$SL6WoqJl5t884nyowxAA1e.yM9BiQOsOts3aY9qdHP5G0K8tfJOs2','123','female','2002-03-10','2022-12-21 19:19:17');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -79,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-08  4:30:06
+-- Dump completed on 2022-12-22 10:19:25

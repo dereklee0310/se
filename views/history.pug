@@ -1,260 +1,195 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1')
-  meta(name='description' content='')
-  meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+extends layout
+block head
   meta(name='generator' content='Hugo 0.104.2')
-  title Dashboard Template &middot; Bootstrap v5.2
   link(rel='canonical' href='https://getbootstrap.com/docs/5.2/examples/dashboard/')
   link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
-  // Favicons
-  //
-    <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
   meta(name='theme-color' content='#712cf9')
-  style.
-    .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    }
-    @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-    }
-    }
-    .b-example-divider {
-    height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
-    border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-    .b-example-vr {
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 100vh;
-    }
-    .bi {
-    vertical-align: -.125em;
-    fill: currentColor;
-    }
-    .nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
-    }
-    .nav-scroller .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: 1rem;
-    margin-top: -1px;
-    overflow-x: auto;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    }
   // Custom styles for this template
   link(href='/css/history.css' rel='stylesheet')
-header.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0.shadow
-  a.navbar-brand.col-md-3.col-lg-2.me-0.px-3.fs-6(href='#') Company name
-  button.navbar-toggler.position-absolute.d-md-none.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#sidebarMenu' aria-controls='sidebarMenu' aria-expanded='false' aria-label='Toggle navigation')
-    span.navbar-toggler-icon
-  input.form-control.form-control-dark.w-100.rounded-0.border-0(type='text' placeholder='Search' aria-label='Search')
-  .navbar-nav
-    .nav-item.text-nowrap
-      a.nav-link.px-3(href='#') Sign out
-.container-fluid
-  .row
-    nav#sidebarMenu.col-md-3.col-lg-2.d-md-block.bg-light.sidebar.collapse
-      .position-sticky.pt-3.sidebar-sticky
-        ul.nav.flex-column
-          li.nav-item
-            a.nav-link.active(aria-current='page' href='#')
-              span.align-text-bottom(data-feather='home')
-              |               Dashboard
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='file')
-              |               Orders
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='shopping-cart')
-              |               Products
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='users')
-              |               Customers
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='bar-chart-2')
-              |               Reports
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='layers')
-              |               Integrations
-        h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted.text-uppercase
-          span Saved reports
-          a.link-secondary(href='#' aria-label='Add a new report')
-            span.align-text-bottom(data-feather='plus-circle')
-        ul.nav.flex-column.mb-2
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='file-text')
-              |               Current month
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='file-text')
-              |               Last quarter
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='file-text')
-              |               Social engagement
-          li.nav-item
-            a.nav-link(href='#')
-              span.align-text-bottom(data-feather='file-text')
-              |               Year-end sale
-    main.col-md-9.ms-sm-auto.col-lg-10.px-md-4
-      .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-        h1.h2 Dashboard
-        .btn-toolbar.mb-2.mb-md-0
-          .btn-group.me-2
-            button.btn.btn-sm.btn-outline-secondary(type='button') Share
-            button.btn.btn-sm.btn-outline-secondary(type='button') Export
-          button.btn.btn-sm.btn-outline-secondary.dropdown-toggle(type='button')
-            span.align-text-bottom(data-feather='calendar')
-            |             This week
-      canvas#myChart.my-4.w-100(width='900' height='380')
-      div
-        table.table.table-striped.table-sm
-          thead
-            tr
-              th(scope='col') #
-              th(scope='col') &#x6AA2;&#x6E2C;&#x9805;&#x76EE;
-              th(scope='col') &#x5730;&#x9EDE;
-              th(scope='col') &#x4E0A;&#x50B3;&#x6642;&#x9593;
-              th(scope='col') Header
-          tbody
-            tr
-              td 1
-              td finger tap
-              td place
-              td time
-              td text
-      h2 Section title
-      .table-responsive
-        table.table.table-striped.table-sm
-          thead
-            tr
-              th(scope='col') #
-              th(scope='col') &#x4E0A;&#x50B3;&#x6642;&#x9593;
-              th(scope='col') Header
-              th(scope='col') Header
-              th(scope='col') Header
-          tbody
-            tr
-              td 1,001
-              td random
-              td data
-              td placeholder
-              td text
-            tr
-              td 1,002
-              td placeholder
-              td irrelevant
-              td visual
-              td layout
-            tr
-              td 1,003
-              td data
-              td rich
-              td dashboard
-              td tabular
-            tr
-              td 1,003
-              td information
-              td placeholder
-              td illustrative
-              td data
-            tr
-              td 1,004
-              td text
-              td random
-              td layout
-              td dashboard
-            tr
-              td 1,005
-              td dashboard
-              td irrelevant
-              td text
-              td placeholder
-            tr
-              td 1,006
-              td dashboard
-              td illustrative
-              td rich
-              td data
-            tr
-              td 1,007
-              td placeholder
-              td tabular
-              td information
-              td irrelevant
-            tr
-              td 1,008
-              td random
-              td data
-              td placeholder
-              td text
-            tr
-              td 1,009
-              td placeholder
-              td irrelevant
-              td visual
-              td layout
-            tr
-              td 1,010
-              td data
-              td rich
-              td dashboard
-              td tabular
-            tr
-              td 1,011
-              td information
-              td placeholder
-              td illustrative
-              td data
-            tr
-              td 1,012
-              td text
-              td placeholder
-              td layout
-              td dashboard
-            tr
-              td 1,013
-              td dashboard
-              td irrelevant
-              td text
-              td visual
-            tr
-              td 1,014
-              td dashboard
-              td illustrative
-              td rich
-              td data
-            tr
-              td 1,015
-              td random
-              td tabular
-              td information
-              td text
-script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous')
-script(src='https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js')
+block title
+  title Dashboard Template &middot; Bootstrap v5.2
+block content  
+  .container-fluid
+    .row
+      nav#sidebarMenu.col-md-3.col-lg-2.d-md-block.bg-light.sidebar.collapse
+        .position-sticky.pt-3.sidebar-sticky
+          ul.nav.flex-column
+            li.nav-item
+              a.nav-link.active(aria-current='page' href='#')
+                span.align-text-bottom(data-feather='home')
+                |               Dashboard
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='file')
+                |               Orders
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='shopping-cart')
+                |               Products
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='users')
+                |               Customers
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='bar-chart-2')
+                |               Reports
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='layers')
+                |               Integrations
+          h6.sidebar-heading.d-flex.justify-content-between.align-items-center.px-3.mt-4.mb-1.text-muted.text-uppercase
+            span Saved reports
+            a.link-secondary(href='#' aria-label='Add a new report')
+              span.align-text-bottom(data-feather='plus-circle')
+          ul.nav.flex-column.mb-2
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='file-text')
+                |               Current month
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='file-text')
+                |               Last quarter
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='file-text')
+                |               Social engagement
+            li.nav-item
+              a.nav-link(href='#')
+                span.align-text-bottom(data-feather='file-text')
+                |               Year-end sale
+      main.col-md-9.ms-sm-auto.col-lg-10.px-md-4
+        .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+          h1.h2 Dashboard
+          .btn-toolbar.mb-2.mb-md-0
+            .btn-group.me-2
+              button.btn.btn-sm.btn-outline-secondary(type='button') Share
+              button.btn.btn-sm.btn-outline-secondary(type='button') Export
+            button.btn.btn-sm.btn-outline-secondary.dropdown-toggle(type='button')
+              span.align-text-bottom(data-feather='calendar')
+              |             This week
+        canvas#myChart.my-4.w-100(width='900' height='380')
+        div
+          table.table.table-striped.table-sm
+            thead
+              tr
+                th(scope='col') #
+                th(scope='col') &#x6AA2;&#x6E2C;&#x9805;&#x76EE;
+                th(scope='col') &#x5730;&#x9EDE;
+                th(scope='col') &#x4E0A;&#x50B3;&#x6642;&#x9593;
+                th(scope='col') Header
+            tbody
+              tr
+                td 1
+                td finger tap
+                td place
+                td time
+                td text
+        h2 Section title
+        .table-responsive
+          table.table.table-striped.table-sm
+            thead
+              tr
+                th(scope='col') #
+                th(scope='col') &#x4E0A;&#x50B3;&#x6642;&#x9593;
+                th(scope='col') Header
+                th(scope='col') Header
+                th(scope='col') Header
+            tbody
+              tr
+                td 1,001
+                td random
+                td data
+                td placeholder
+                td text
+              tr
+                td 1,002
+                td placeholder
+                td irrelevant
+                td visual
+                td layout
+              tr
+                td 1,003
+                td data
+                td rich
+                td dashboard
+                td tabular
+              tr
+                td 1,003
+                td information
+                td placeholder
+                td illustrative
+                td data
+              tr
+                td 1,004
+                td text
+                td random
+                td layout
+                td dashboard
+              tr
+                td 1,005
+                td dashboard
+                td irrelevant
+                td text
+                td placeholder
+              tr
+                td 1,006
+                td dashboard
+                td illustrative
+                td rich
+                td data
+              tr
+                td 1,007
+                td placeholder
+                td tabular
+                td information
+                td irrelevant
+              tr
+                td 1,008
+                td random
+                td data
+                td placeholder
+                td text
+              tr
+                td 1,009
+                td placeholder
+                td irrelevant
+                td visual
+                td layout
+              tr
+                td 1,010
+                td data
+                td rich
+                td dashboard
+                td tabular
+              tr
+                td 1,011
+                td information
+                td placeholder
+                td illustrative
+                td data
+              tr
+                td 1,012
+                td text
+                td placeholder
+                td layout
+                td dashboard
+              tr
+                td 1,013
+                td dashboard
+                td irrelevant
+                td text
+                td visual
+              tr
+                td 1,014
+                td dashboard
+                td illustrative
+                td rich
+                td data
+              tr
+                td 1,015
+                td random
+                td tabular
+                td information
+                td text

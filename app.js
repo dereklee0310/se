@@ -11,6 +11,60 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 const flash = require('connect-flash');
 
+// testestestsetsetsetestsetes
+const bcrypt = require("bcrypt");
+const session = require('express-session')
+const {sql, pool} = require('./modules/db');
+const ensureAuthenticated = require('./modules/authen').ensureAuthenticated;
+
+passport.use(new strategy({
+  usernameField: 'account',
+  passwordField: 'password',
+  // passReqtoCallback: true
+  },
+  function(account, password, done) {
+    pool.query(
+      `select * from user where email = '${account}'`,
+      function (err, results) {
+        if (err)
+          return done(err);
+        if (Object.keys(results).length === 0) {
+          return done(null, false)
+        }
+
+        if (bcrypt.compareSync(password, results[0].password))//todo change this into async
+          return done(null, results[0])
+        else
+          return done(null, false)
+      }
+    );
+  }
+))
+
+passport.serializeUser(function(user, done) {
+  done(null, user.user_id);
+})
+
+app.use(session({
+  secret: 'roottoor',
+  resave: 'false',
+  saveUninitialized: 'false'
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.deserializeUser(function(id, done) {
+  pool.query(
+    `select * from user where user_id = '${id}'`,
+    function (err, results) {
+      if (err)
+        return done(err);
+      done(null, results[0]);
+    }
+  );
+})
+
 require("dotenv").config();
 
 const account = require("./routes/account");
