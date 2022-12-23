@@ -9,7 +9,7 @@ const ensureAuthenticated = require('../modules/authen').ensureAuthenticated;
 router.post('/', (req, res) => {
   // res.render("upload");
   console.log(req.body)
-  res.send('ok')
+  res.redirect('/home/?sent=true#contactus')
 });
 
 module.exports = router;

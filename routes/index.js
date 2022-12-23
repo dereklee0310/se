@@ -17,6 +17,8 @@ router.get("/", (req, res) => {
     res.render('index', {logout: 'true'})
   else if (req.query.signupSuccess === 'true')
     res.render('index', {msg: 'signupSuccess'})
+  else if (req.query.sent === 'true')
+    res.render('index', {msg: 'sent'})
   else
     res.render('index', {login: 'false'})
 });

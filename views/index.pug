@@ -221,7 +221,7 @@ main
           rect(width='100%' height='100%' fill='#eee')
           text(x='50%' y='50%' fill='#aaa' dy='.3em') 500x500
     // /END THE FEATURETTES
-    hr.featurette-divider
+    hr#contactus.featurette-divider
     .container.contact_us
       .row.justify-content-center
         .col-md-6.text-center.mb-2
@@ -232,29 +232,29 @@ main
             .row
               .col-md-9.col-lg-7
                 .contact-wrap.w-100.p-md-5.p-4
-                  h3.mb-4 Get in touch with us
+                  h3.mb-4 聯絡我們
                   #form-message-warning.mb-4
                   #form-message-success.mb-4
-                    // 用pug切換
-                    | Your message was sent, thank you!
+                    if msg === 'sent'
+                      .alert.alert-info 信件已送出，感謝您的寶貴意見!
                   form#contactForm.contactForm(action='/contactus' method='POST' name='contactForm')
                     .row
                       .col-md-6
                         .form-group
-                          label.label(for='name') Full Name
-                          input#name.form-control(type='text' name='name' placeholder='Name')
+                          label.label(for='name') 姓名
+                          input#name.form-control(type='text' name='name' placeholder='Name' required)
                       .col-md-6
                         .form-group
-                          label.label(for='email') Email Address
-                          input#email.form-control(type='email' name='email' placeholder='Email')
+                          label.label(for='email') 您的電子郵件地址
+                          input#email.form-control(type='email' name='email' placeholder='Email' required)
                       .col-md-12
                         .form-group
-                          label.label(for='subject') Subject
-                          input#subject.form-control(type='text' name='subject' placeholder='Subject')
+                          label.label(for='subject') 主旨
+                          input#subject.form-control(type='text' name='subject' placeholder='Subject' required)
                       .col-md-12
                         .form-group
-                          label.label(for='message') Message
-                          textarea#message.form-control(name='message' cols='30' rows='4' placeholder='Message')
+                          label.label(for='message') 問題與意見
+                          textarea#message.form-control(name='message' cols='30' rows='4' placeholder='Message' required)
                       .col-md-12
                         .form-group
                           input.btn.btn-primary(type='submit' value='Send Message')
