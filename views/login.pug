@@ -34,10 +34,10 @@ body.text-center
       img.mb-4(src='/images/logo.png' alt='')
       //- h1.h4.mb-3.fw-normal 請登入
       //- put warning here
-      if msg === 'loginFailed'
+      if msg === 'failed'
         .alert.alert-danger
           strong 帳號或密碼錯誤!
-      if msg === 'loginNeeded'
+      if msg === 'required'
         .alert.alert-info
           strong 請登入以使用該功能
         //- div 請檢查您的帳戶名稱和密碼後再試一次

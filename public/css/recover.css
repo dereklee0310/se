@@ -46,3 +46,7 @@ body {
 .chg {
   float: right;
 }
+
+.alert {
+  border-radius: 20px;
+}

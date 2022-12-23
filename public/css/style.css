@@ -16,7 +16,7 @@ body {
 	-ms-align-items: center;
 	-moz-align-items: center;
 	-webkit-align-items: center;
-	background: #383a4f;
+	background: #fff;/*大背景*/
 	flex-direction: column;
 	-o-flex-direction: column;
 	-ms-flex-direction: column;
@@ -53,7 +53,7 @@ body {
 }
 .wizard-v6-content .wizard-form {
 	width: 100%;
-	background: #525575;
+	background: #fff;/*懸浮背景*/
 	border-radius: 10px;
 	-o-border-radius: 10px;
 	-ms-border-radius: 10px;
@@ -78,6 +78,11 @@ body {
 }
 .form-register .steps li,
 .form-register .steps li.current {
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-o-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-ms-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 	outline: none;
 	-o-outline: none;
     -ms-outline: none;
@@ -91,7 +96,7 @@ body {
     position: relative;
     width: 33.33%;
     margin-right: 20px;
-    background: #fff;
+    background: #fff;/*步驟背景*/
 }
 .form-register .steps li:last-child {
 	margin-right: 0;
@@ -125,7 +130,7 @@ body {
     -moz-box-shadow: 0px 4px 11px 0px rgba(0, 0, 0, 0.14);
     -webkit-box-shadow: 0px 4px 11px 0px rgba(0, 0, 0, 0.14);
     font-size: 18px;
-    color: #fff;
+    color: #fff;/*步驟幾*/
     font-size: 25px;
     background: #ccc;
     padding: 30px;
@@ -147,7 +152,7 @@ body {
 .form-register .steps li.current a:active .step-icon,
 .form-register .steps li.done a .step-icon,
 .form-register .steps li.done a:active .step-icon {
-    background: #55e8d5;
+    background: #6c757d;/*步驟標題*/
 }
 .form-register .steps li a .step-text {
 	color: #333;
@@ -174,7 +179,7 @@ body {
 .inner .form-heading h3 {
 	font-weight: 700;
 	font-size: 30px;
-	color: #fff;
+	color: #333;
 	margin: 0;
     padding: 0 0 35px;
 }
@@ -194,7 +199,7 @@ body {
 }
 .inner .form-row .form-holder {
     width: 50%;
-    padding: 0 15px;
+    padding: 0 20px;
     position: relative;
 }
 .inner .form-row .form-holder.form-holder-2 {
@@ -205,29 +210,48 @@ body {
     position: absolute;
     top: 6px;
     left: 10px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
-    color: #fff;
+    color: #333;/*輸入標題*/
     transform-origin: 0 0;
     transition: all .2s ease;
     -moz-transition: all .2s ease;
     -webkit-transition: all .2s ease;
     -o-transition: all .2s ease;
     -ms-transition: all .2s ease;
+    background: #fff;
 }
 .inner .form-row .form-holder label.special-label {
     display: block;
     float: none;
+    padding-left: 9.5px;
     padding-right: 20px;
-    color: #fff;
-    font-size: 16px;
+    color: #333;/**/
+    font-size: 18px;
     font-weight: 400;
     margin-bottom: 20px;
 }
 .inner .form-row .form-holder label.special-label-1 {
-	font-weight: 600;
-	font-size: 14px;
-	color: #55e8d5;
+	font-weight: 400;
+    font-size: 18px;
+    padding-left: 9.5px;
+	color: #343a40;/*輸入選項標題*/
+}
+.inner .form-row .form-holder label.special-label-2 {
+	font-weight: 400;
+    font-size: 18px;
+    padding-left: 9.5px;
+	color: #343a40;/*輸入選項標題*/
+}
+input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
 .inner .form-images {
     margin-bottom: 20px;
@@ -236,7 +260,7 @@ body {
 .inner .form-row .form-holder select {
     width: 100%;
     padding: 11.5px 20px;
-    border: none;
+    border: #333;
     appearance: unset;
     -moz-appearance: unset;
     -webkit-appearance: unset;
@@ -253,7 +277,7 @@ body {
     font-weight: 400;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    color: #fff;
+    color: #6c757d;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -267,19 +291,19 @@ body {
     -webkit-transform: translateY(-34px) scale(0.9);
     -o-transform: translateY(-34px) scale(0.9);
     -ms-transform: translateY(-34px) scale(0.9);
-    color: #55e8d5;
+    color: #34304a;
 }
 input::placeholder {
-    color: #fff;
+    color: #333;
 }
 input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #fff;
+   color: #333;
 }
 input::-ms-input-placeholder { /* Microsoft Edge */
-   color: #fff;
+   color: #333;
 }
 .inner .form-row .form-holder select {
-    background: #fff url('../images/wizard_v6_icon.png') no-repeat scroll;
+    background: #f8f9fa url('../images/wizard_v6_icon.png') no-repeat scroll;
     background-position: right 16px center;
     z-index: 1;
     cursor: pointer;
@@ -307,7 +331,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     right: 6%;
     font-size: 19px;
     cursor: pointer;
-    color: #fff;
+    color: #333;
 }
 .inner .form-row .form-holder.form-holder-2 .select-btn {
 	right: 3.5%;
@@ -360,11 +384,11 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	display: block;
 	font-size: 16px;
 	font-weight: 400;
-	color: rgba(255, 255, 255, 0.5);
+	color: #333;
 	padding-bottom: 0;
 }
 .inner .table-responsive tbody td {
-	color: #55e8d5;
+	color: #333;
 	font-size: 18px;
 	font-weight: 700;
 	padding-bottom: 25px;
@@ -374,22 +398,22 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 .actions ul {
 	list-style: none;
-	padding-left: 0;
-    margin: 15px 0 0;
+    padding-left: 0;
+    margin: 15px 250px 0px;
     display: flex;
     display: -webkit-flex;
-    justify-content: center;
-    -o-justify-content: center;
-    -ms-justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
+    justify-content: space-evenly;
+    -o-justify-content: space-evenly;
+    -ms-justify-content: space-evenly;
+    -moz-justify-content: space-evenly;
+    -webkit-justify-content: space-evenly;
 }
 .actions ul li.disabled,
 .actions ul li:first-child {
 	display: inline-flex;
 }
 .actions ul li {
-	padding: 0;
+    padding: 0;
     border: none;
     display: inline-flex;
     height: 45px;
@@ -410,13 +434,13 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     -ms-border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    background: #43ccba;
+    background: #0d6efd;/*按鈕*/
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
 }
 .actions ul li:hover {
-	background: #32998b
+	background: #0d6efd;;/*按鈕*/
 }
 .actions ul li a {
 	color: #fff;

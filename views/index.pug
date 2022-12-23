@@ -69,29 +69,33 @@ header
             a.nav-link(href='/history') 檢測紀錄
           li.nav-item.px-3
             a.nav-link(href='#aboutus') 關於我們
-        ul#hello.nav-item.dropdown.mb-2.mb-md-0(style='display: block;')
-          button.btn.btn-dark.nav-light.dropdown-toggle.btn-outline-secondary(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
-            //- | OOO&#x4F60;&#x597D;
-            if login === 'false'
+        if login !== 'true'
+          ul#login.nav-item.mb-2.mb-md-0(style='display: block;')
+            a.btn.btn-dark.nav-light.btn-outline-secondary(type='button' href='/account/login' aria-expanded='false' data-bs-display='static')
               | 登入
-            else
-              | ooo您好
-              
-          ul.dropdown-menu.dropdown-menu-end
-            li
-              a.dropdown-item(href='/account/info') 個人資料
-            li
-              a.dropdown-item(href='/history') 檢測紀錄
-            li
-              a.dropdown-item(href='/account/password') 變更密碼
-            //- li
-            //-   a.dropdown-item(href='/patient') 病患資料
-            li#logout(style='display: block;')
-              input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/account/logout')
-        ul#login.nav-item.mb-2.mb-md-0(style='display: block;')
-          //!!!!!!!!!!!!!!  fix this
-          //- button.btn.btn-dark.nav-light.btn-outline-secondary(type='button' onclick="location.href='/login'" aria-expanded='false' data-bs-display='static')
-          //-   | &#x767B;&#x5165;
+        else
+          ul#hello.nav-item.dropdown.mb-2.mb-md-0(style='display: block;')
+            button.btn.btn-dark.nav-light.dropdown-toggle.btn-outline-secondary(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
+              | #{user.last_name + user.first_name} 
+                
+            ul.dropdown-menu.dropdown-menu-end
+              li
+                a.dropdown-item(href='/account/info') 個人資料
+              li
+                a.dropdown-item(href='/history') 檢測紀錄
+              li
+                a.dropdown-item(href='/account/password') 變更密碼
+              //- li
+              //-   a.dropdown-item(href='/patient') 病患資料
+              li#logout(style='display: block;')
+                //- input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/account/logout')
+                a.dropdown-item(href='/account/logout') 登出
+        //- if logout === 'true'
+        //-   <script>alert('您已成功登出!')</script>
+        //- if msg === 'justLogout'
+        //-   <script>alert('您已成功登出!')</script>
+        //- else if msg === 'signupSuccess'
+        //-   <script>alert('註冊成功! 點擊右上方的按鈕以登入')</script>
 main
   #myCarousel.carousel.slide(data-bs-ride='true')
     .carousel-indicators
@@ -233,7 +237,7 @@ main
                   #form-message-success.mb-4
                     // 用pug切換
                     | Your message was sent, thank you!
-                  form#contactForm.contactForm(method='POST' name='contactForm')
+                  form#contactForm.contactForm(action='/contactus' method='POST' name='contactForm')
                     .row
                       .col-md-6
                         .form-group
@@ -249,7 +253,7 @@ main
                           input#subject.form-control(type='text' name='subject' placeholder='Subject')
                       .col-md-12
                         .form-group
-                          label.label(for='#') Message
+                          label.label(for='message') Message
                           textarea#message.form-control(name='message' cols='30' rows='4' placeholder='Message')
                       .col-md-12
                         .form-group

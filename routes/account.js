@@ -1,139 +1,114 @@
-const { config } = require("dotenv");
-const express = require("express");
+const { config } = require('dotenv');
+const express = require('express');
 const router = express.Router();
-const bcrypt = require("bcrypt");
-
-const passport = require("passport");
-const strategy = require("passport-local");
-
-const bodyParser = require('body-parser');
-// const session = require('express-session')
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 const {sql, pool} = require('../modules/db');
 const ensureAuthenticated = require('../modules/authen').ensureAuthenticated;
+const nodemailer = require('nodemailer')
 
-
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated())
-//     return next()
-//   res.redirect('/account/login/?loginNeeded=true')
-// }
-
-// passport.use(new strategy({
-//     usernameField: 'account',
-//     passwordField: 'password',
-//     // passReqtoCallback: true
-//   },
-//   function(account, password, done) {
-//     pool.query(
-//       `select * from user where email = '${account}'`,
-//       function (err, results) {
-//         if (err)
-//           return done(err);
-//         if (Object.keys(results).length === 0) {
-//           return done(null, false)
-//         }
-  
-//         if (bcrypt.compareSync(password, results[0].password))//todo change this into async
-//           return done(null, results[0])
-//         else
-//           return done(null, false)
-//       }
-//     );
-//   }
-// ))
-
-// passport.serializeUser(function(user, done) {
-//   done(null, user.user_id);
-// })
-
-// passport.deserializeUser(function(id, done) {
-//   pool.query(
-//     `select * from user where user_id = '${id}'`,
-//     function (err, results) {
-//       if (err)
-//         return done(err);
-//       done(null, results[0]);
-//     }
-//   );
-// })
-
-// router.use(session({
-//   secret: 'roottoor',
-//   resave: 'false',
-//   saveUninitialized: 'false'
-// }))
-
-// router.use(bodyParser.urlencoded({ extended: true }));
-router.use(passport.initialize())
-router.use(passport.session())
-
-// these router are under the path /account/...
-router.get("/", (req, res) => {
-  res.redirect("/account/login");
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'parkinson.se.test@gmail.com',
+    pass: 'scrzlvgdmnomvgtu'
+  }
 });
 
-router.get("/login", (req, res) => {
-  // console.log(req.session.status)
-  if (req.query.loginFailed === 'true')
-  // if(req.session.status === 'loginFailed')
-    res.render('login', {msg: 'loginFailed'});
-  else if (req.query.login === 'false')
-    res.render('login', {msg: 'loginNeeded'})
+router.get('/', (req, res) => {
+  res.redirect('/account/login');
+});
+
+router.get('/login', (req, res) => {
+  if (req.query.failed === 'true')
+    res.render('login', {msg: 'failed'});
+  else if (req.query.required === 'true')
+    res.render('login', {msg: 'required'})
   else
     res.render('login')
-});
+}); 
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/home',
-  failureRedirect: '/account/login?loginFailed=true'
-  // failureRedirect: '/account/login'
+  failureRedirect: '/account/login?failed=true'
 }))
 
-router.post("/signup", (req, res) => {
+router.get('/signup', (req, res) => {
+  if (req.query.failed === 'true')
+    res.render('signup', {msg: 'failed'})
+  else
+    res.render('signup');
+});
+
+router.post('/signup', (req, res) => {
   pool.query(
     `select user_id from user where email = '${req.body.email}'`,
     function (err, results) {
       if (err)
-        res.send('oooops....')
-
+        throw err
       if (Object.keys(results).length !== 0) {
-        res.redirect('/account/signup?signupFailed=true')
+        res.redirect('/account/signup?failed=true')
         return
       }
       hash_val = bcrypt.hashSync(req.body.password, 10); //todo change this into async
       pool.query(
-        // todo modify this
-        "insert into user" +
-          ` values(NULL, '${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash_val}', '${req.body.pid}', '${req.body.gender}', '${req.body.birth}', default)`,
+        'insert into user' +
+        ` values(NULL, '${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash_val}', '${req.body.pid}', '${req.body.gender}', '${req.body.birth}', default)`,
         function (err, results) {
-          if (err) {
+          if (err)
             throw err;
-          }
-          // console.log(results);
-          // console.log(bcrypt.compareSync(req.body.password, hash_val));
-          // res.json(results);
-          res.redirect('/home/?login=true')
+          res.redirect('/home/?signupSuccess=true')
         }
       );
     }
   );
 });
 
-router.get("/recover", (req, res) => {
-  res.render("recover"); //todo
+router.get('/recover', (req, res) => {
+  if (req.query.recoverFailed === 'true')
+    res.render('recover', {msg: 'recoverFailed'})
+  else
+    res.render('recover');
 });
 
-router.get("/password", ensureAuthenticated, (req, res) => {
-  res.render("password");
+router.post('/recover', (req, res) => {
+  pool.query(`select * from user where email = '${req.body.email}'`, function (err, results) {
+    if (err)
+      throw err
+    if (Object.keys(results).length === 0) {
+      res.redirect('/account/recover?recoverFailed=true')
+      return
+    }
+    var password = Math.random().toString(36).slice(-8);
+    hash_val = bcrypt.hashSync(password, 10); //todo change this into async
+    pool.query(`update user set password = '${hash_val}' where email = '${req.body.email}'`, function (err, results) {
+      var mailOptions = {
+        from: 'parkinson.se.test@gmail.com',
+        to: `${req.body.email}`,
+        subject: '帕金森氏症雲端檢測服務平台密碼重設',
+        text: `您的密碼已被重設為: ${password}，請在登入後盡快修改!`
+      };
+      transporter.sendMail(mailOptions, function(err, info) {
+        if (err)
+          throw err
+      })
+      res.redirect('/account/login?recover=true')
+    })
+  })
 });
 
-router.get("/signup", (req, res) => {
-  res.render("signup"); //todo
+router.get('/password', ensureAuthenticated, (req, res) => {
+  res.render('password');
 });
 
+router.post('/password', ensureAuthenticated, (req, res) => {
+  hash_val = bcrypt.hashSync(req.body.new_password, 10); //todo change this into async
+  pool.query(`update user set password = '${hash_val}' where email = '${req.user.email}'`, function (err, results) {
+    res.redirect('/home?changePassword=true')
+  })
+});
 
-
-router.get("/info", ensureAuthenticated, (req, res) => {
+router.get('/info', ensureAuthenticated, (req, res) => {
   user = req.user
   if (user.gender === 'male')
     gender = '男'
@@ -141,15 +116,16 @@ router.get("/info", ensureAuthenticated, (req, res) => {
     gender = '女'
   else
     gender = '第三性別'
-  res.render("info", {first_name: user.first_name, last_name: user.last_name, email: user.email, pid: user.pid, gender: gender, birth: user.birth});
-  // res.render("info"); //todo
+  res.render('info', {first_name: user.first_name, last_name: user.last_name, email: user.email, pid: user.pid, gender: gender, birth: user.birth});
+  // res.render('info'); //todo
 });
 
 router.get('/logout', ensureAuthenticated, function(req, res, next) {
   req.logOut(function(err) {
     if(err)
       return next(err);
-    res.redirect('/') //todo test this
+    req.session.status = 'logout'
+    res.redirect('/home')
   })
 })
 

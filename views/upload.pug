@@ -55,6 +55,8 @@ head
                 .form-holder
                   label.special-label-1(for='birth') 出生年月日 (Birthday)
                   input#birth.day(type='text' name='birth' placeholder='請選擇日期')
+                  span.select-btn
+                    i.zmdi.zmdi-chevron-down
               .form-row
                 .form-holder.form-holder-2
                   label.form-row-inner
@@ -84,10 +86,13 @@ head
                 .form-holder.form-holder-2
                   label.special-label-1(for='day') 上傳日期 (Upload Date)
                   input#day.day(type='text' name='day' placeholder='請選擇日期')
+                  span.select-btn
+                    i.zmdi.zmdi-chevron-down
               .form-row
                 .form-holder.form-holder-2
-                  label.special-label-1(for='video') 選擇影片 (Choose Video)
-                  input#video_file.filestyle(type='file' name='video' accept='video/x-msvideo,video/mp4,video/quicktime' required)
+                  label.special-label-2(for='video') 選擇影片 (Choose Video)
+                    input#video(name='video' style='display:none;' type='file' accept='video/x-msvideo,video/mp4,video/quicktime' required)
+                    i.zmdi.zmdi-cloud-upload 
           // SECTION 3
           h2
             p.step-icon

@@ -29,10 +29,12 @@ head
 	// add "body.text-center", otherwise the elements in form will not be aligned
 	body.text-center
 		main.form-recover
-			form(action='./account/recover' method='post')
+			form(action='/account/recover' method='post')
 				h1.h4.mb-3.fw-normal 忘記密碼
 				.form-floating
 					input#email.form-control(type='email' placeholder='email' name='email' required='')
 					label(for='email') 電子郵件
-				a.btn.cancel.btn-lg.btn-primary(onclick="history.back()") 取消
-				button.btn.chg.btn-lg.btn-primary(type='submit') 重設密碼
+				if msg === 'recoverFailed'
+					.alert.alert-danger 不存在的帳號(電子郵件)
+				a.btn.cancel.btn-lg.btn-primary(href='/account/recover') 取消
+				button.btn.chg.btn-lg.btn-primary(type='submit' href='/account/recover' methohd='post') 重設密碼

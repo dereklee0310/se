@@ -41,6 +41,8 @@ html
 				.form-floating
 					input#email.form-control(type='email' placeholder='email' name='email' required='')
 					label(for='email') 帳號名稱(電子郵件)
+				if msg === 'failed'
+					.alert.alert-danger 該帳號(電子郵件)已存在
 				.form-floating
 					input#password.form-control(type='password' placeholder='Password' name='password' required='')
 					label(for='password') 密碼

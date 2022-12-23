@@ -2,19 +2,17 @@ const path = require("path");
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-// const { sql, pool } = require("./modules/db");
 const passport = require("passport");
 const strategy = require("passport-local");
+const flash = require('connect-flash');
+const bcrypt = require("bcrypt");
+const session = require('express-session')
+const {sql, pool} = require('./modules/db');
 const app = express();
 app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-const flash = require('connect-flash');
 
-// testestestsetsetsetestsetes
-const bcrypt = require("bcrypt");
-const session = require('express-session')
-const {sql, pool} = require('./modules/db');
 const ensureAuthenticated = require('./modules/authen').ensureAuthenticated;
 
 passport.use(new strategy({
@@ -28,10 +26,8 @@ passport.use(new strategy({
       function (err, results) {
         if (err)
           return done(err);
-        if (Object.keys(results).length === 0) {
+        if (Object.keys(results).length === 0)
           return done(null, false)
-        }
-
         if (bcrypt.compareSync(password, results[0].password))//todo change this into async
           return done(null, results[0])
         else
@@ -41,19 +37,18 @@ passport.use(new strategy({
   }
 ))
 
-passport.serializeUser(function(user, done) {
-  done(null, user.user_id);
-})
 
 app.use(session({
   secret: 'roottoor',
   resave: 'false',
   saveUninitialized: 'false'
 }))
-
 app.use(passport.initialize())
 app.use(passport.session())
 
+passport.serializeUser(function(user, done) {
+  done(null, user.user_id);
+})
 passport.deserializeUser(function(id, done) {
   pool.query(
     `select * from user where user_id = '${id}'`,
@@ -70,18 +65,13 @@ require("dotenv").config();
 const account = require("./routes/account");
 const home = require("./routes/index");
 const upload = require("./routes/upload");
-const aboutus = require("./routes/aboutus");
-
+const contactus = require('./routes/contactus')
+const history = require('./routes/history')
 app.use("/account", account);
 app.use("/home", home);
 app.use("/upload", upload);
-app.use("/aboutus", aboutus);
-app.use(flash())
-
-app.get('/test', (req, res) => {
-  // req.flash('oooops') // todo set this up
-})
-
+app.use('/contactus', contactus)
+app.use('/history', history)
 // start the server
 app.listen(process.env.APP_PORT, () => {
   console.log(`Nodejs app listening on port ${process.env.APP_PORT}`);
@@ -108,9 +98,7 @@ app.listen(process.env.APP_PORT, () => {
 
 // redirect to home page
 app.get("/", (req, res) => {
-  res.redirect("/home?login=false");
-  // if (req.isAuthenticated())
-  //   console.log('hello')
+  res.redirect("/home");
 });
 
 //! original test for database operation!
@@ -120,13 +108,9 @@ app.get("/form", (req, res) => {
   res.render("test");
 });
 
-// app.get('/upload', (req, res) => {
-//   res.render('upload')
-// })
-
-app.get("/history", (req, res) => {
-  res.render("history");
-});
+// app.get("/history", (req, res) => {
+//   res.render("history");
+// });
 
 app.get("/records", (req, res) => {
   if (pool.state === "disconnected") {
