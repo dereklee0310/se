@@ -28,8 +28,4 @@ router.get('/history', ensureAuthenticated, (req, res) => {
   res.render('history');
 });
 
-router.post("/contact", (req, res) => {
-  res.render("aboutus"); //todo
-});
-
 module.exports = router;

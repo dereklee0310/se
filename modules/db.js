@@ -15,7 +15,8 @@ require('dotenv').config({path: '../.env'});
 
 // create connection to db
 var pool = mysql.createPool({
-  host: 'localhost',
+  // host: 'localhost',
+  host: '34.81.68.215',
   port: '3306', // default port for mysql server
   user: 'root', // mysql user name
   password: 'group10', // mysql password

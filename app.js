@@ -4,74 +4,74 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const strategy = require("passport-local");
-const flash = require('connect-flash');
+const flash = require("connect-flash");
 const bcrypt = require("bcrypt");
-const session = require('express-session')
-const {sql, pool} = require('./modules/db');
+const session = require("express-session");
+const { sql, pool } = require("./modules/db");
 const app = express();
 app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+const axios = require("axios");
 
-const ensureAuthenticated = require('./modules/authen').ensureAuthenticated;
+const ensureAuthenticated = require("./modules/authen").ensureAuthenticated;
 
-passport.use(new strategy({
-  usernameField: 'account',
-  passwordField: 'password',
-  // passReqtoCallback: true
-  },
-  function(account, password, done) {
-    pool.query(
-      `select * from user where email = '${account}'`,
-      function (err, results) {
-        if (err)
-          return done(err);
-        if (Object.keys(results).length === 0)
-          return done(null, false)
-        if (bcrypt.compareSync(password, results[0].password))//todo change this into async
-          return done(null, results[0])
-        else
-          return done(null, false)
-      }
-    );
-  }
-))
+passport.use(
+  new strategy(
+    {
+      usernameField: "account",
+      passwordField: "password",
+      // passReqtoCallback: true
+    },
+    function (account, password, done) {
+      pool.query(
+        `select * from user where email = '${account}'`,
+        function (err, results) {
+          if (err) return done(err);
+          if (Object.keys(results).length === 0) return done(null, false);
+          if (bcrypt.compareSync(password, results[0].password))
+            //todo change this into async
+            return done(null, results[0]);
+          else return done(null, false);
+        }
+      );
+    }
+  )
+);
 
+app.use(
+  session({
+    secret: "roottoor",
+    resave: "false",
+    saveUninitialized: "false",
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(session({
-  secret: 'roottoor',
-  resave: 'false',
-  saveUninitialized: 'false'
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.user_id);
-})
-passport.deserializeUser(function(id, done) {
+});
+passport.deserializeUser(function (id, done) {
   pool.query(
     `select * from user where user_id = '${id}'`,
     function (err, results) {
-      if (err)
-        return done(err);
+      if (err) return done(err);
       done(null, results[0]);
     }
   );
-})
+});
 
 require("dotenv").config();
 
 const account = require("./routes/account");
 const home = require("./routes/index");
 const upload = require("./routes/upload");
-const contactus = require('./routes/contactus')
-const history = require('./routes/history')
+const history = require("./routes/history");
 app.use("/account", account);
 app.use("/home", home);
 app.use("/upload", upload);
-app.use('/contactus', contactus)
-app.use('/history', history)
+app.use("/history", history);
 // start the server
 app.listen(process.env.APP_PORT, () => {
   console.log(`Nodejs app listening on port ${process.env.APP_PORT}`);
@@ -101,87 +101,24 @@ app.get("/", (req, res) => {
   res.redirect("/home");
 });
 
-//! original test for database operation!
-app.get("/form", (req, res) => {
-  // console.log(req.body);
-  // res.sendFile(__dirname + '/index.html');
-  res.render("test");
-});
+app.get("/test", (req, res) => {
+  axios({
+    method: "get",
+    url: "http://140.123.105.112:50124/",
+    // data: { "name": fileName }
+  }).then(function (result) {
+    // var data = result.data;
+    // console.log(result.data);
 
-// app.get("/history", (req, res) => {
-//   res.render("history");
-// });
-
-app.get("/records", (req, res) => {
-  if (pool.state === "disconnected") {
-    // return respond(null, { status: 'fail', message: 'server down'});
-    console.log("Server is disconnected from database");
-  }
-  pool.query("select * from upload_records", function (err, rows) {
-    //callback function
-    console.log(rows);
-    // console.log(err)
-    // 釋放連線
-    // connection.release();
-
-    res.json(rows);
+    // res.redirect(url.format({
+    //     pathname:"/upload/completed",
+    //     query: {
+    //         "left": String(data[0].left),
+    //         "right": String(data[0].right)
+    //     }
+    // }));
+    console.log(result);
   });
-  // res.sendFile(__dirname + '/tmp.html');
-});
-
-app.post("/create", (req, res) => {
-  if (pool.state === "disconnected") {
-    // return respond(null, { status: 'fail', message: 'server down'});
-    console.log("Server is disconnected from database");
-  }
-  pool.query(
-    "insert into upload_records" +
-      ` values('${req.body.name}', '${req.body.age}', '${req.body.gender}', '${req.body.location}', '${req.body.time}')`,
-    function (err, results) {
-      if (err) {
-        throw err;
-      }
-      console.log(results);
-      res.json(results);
-    }
-  );
-  // res.sendFile(__dirname + '/tmp.html');
-});
-
-app.get("/search", (req, res) => {
-  if (pool.state === "disconnected") {
-    // return respond(null, { status: 'fail', message: 'server down'});
-    console.log("Server is disconnected from database");
-  }
-  pool.query(
-    `select * from upload_records where Name = '${req.query.person}'`,
-    function (err, results) {
-      if (err) {
-        throw err;
-      }
-      // console.log(results)
-      res.json(results);
-    }
-  );
-  res.sendFile(__dirname + "/tmp.html");
-});
-
-app.post("/delete", (req, res) => {
-  if (pool.state === "disconnected") {
-    // return respond(null, { status: 'fail', message: 'server down'});
-    console.log("Server is disconnected from database");
-  }
-  pool.query(
-    `delete from upload_records where Name = '${req.body.person}'`,
-    function (err, results) {
-      if (err) {
-        throw err;
-      }
-      // console.log(results)
-      res.json(results);
-    }
-  );
-  // res.sendFile(__dirname + '/tmp.html');
 });
 
 module.exports = app;

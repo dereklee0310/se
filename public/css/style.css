@@ -253,6 +253,12 @@ input[type="file"] {
     clip: rect(0,0,0,0);
     border: 0;
 }
+.inner .form-row .form-holder label.filename{
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 11.5px;
+	color: #6c757d;
+}
 .inner .form-images {
     margin-bottom: 20px;
 }
@@ -318,7 +324,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 	background: transparent;
     border-bottom: 1px solid;
     border-bottom-color: rgba(255,255,255,0.3);
-    color: #fff;
+    color: #6c757d;
     position: relative;
     background: 0 0;
     z-index: 1;

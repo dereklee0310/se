@@ -16,29 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `upload_records`
+-- Table structure for table `upload_record`
 --
 
-DROP TABLE IF EXISTS `upload_records`;
+DROP TABLE IF EXISTS `upload_record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `upload_records` (
-  `Name` varchar(255) DEFAULT NULL,
-  `Age` int DEFAULT NULL,
-  `Gender` enum('male','female','third gender') DEFAULT NULL,
-  `Location` varchar(255) DEFAULT NULL,
-  `Time` date DEFAULT NULL
+CREATE TABLE `upload_record` (
+  `record_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `pid` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `birth` varchar(255) NOT NULL,
+  `taken_date` varchar(255) NOT NULL,
+  `taken_location` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `result` varchar(255) NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`record_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `upload_records`
+-- Dumping data for table `upload_record`
 --
 
-LOCK TABLES `upload_records` WRITE;
-/*!40000 ALTER TABLE `upload_records` DISABLE KEYS */;
-INSERT INTO `upload_records` VALUES ('Bob',25,'male','home1','2022-11-27'),('David',17,'male','home2','2022-11-27'),('Mary',45,'female','home3','2022-11-27'),('test_name',111,'male','test_loc','2022-11-03'),('t1',31,'female','ccu','2022-11-02'),('123',21,'male','ccu','2022-11-09'),('123',21,'male','ccu','2022-11-09'),('final_test',77,'male','ccu','2022-11-09'),('new_test',12,'male','new_loc','2022-11-10'),('final',123,'male','loca','2022-12-12');
-/*!40000 ALTER TABLE `upload_records` ENABLE KEYS */;
+LOCK TABLES `upload_record` WRITE;
+/*!40000 ALTER TABLE `upload_record` DISABLE KEYS */;
+/*!40000 ALTER TABLE `upload_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -81,4 +87,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-22 10:19:25
+-- Dump completed on 2022-12-25  5:29:25

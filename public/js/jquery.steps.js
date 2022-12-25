@@ -855,29 +855,29 @@ function paginationClickHandler(event)
 function refreshPagination(wizard, options, state)
 {
     if (options.enablePagination)
-    {
+    {   
         var finish = wizard.find(".actions a[href$='#finish']").parent(),
-            //previous = wizard.find(".actions a[href$='#previous']").parent(),
+            previous = wizard.find(".actions a[href$='#previous']").parent(),
             next = wizard.find(".actions a[href$='#next']").parent();
 
-        if (!options.forceMoveForward)
+        /*if (!options.forceMoveForward)
         {
             var previous = wizard.find(".actions a[href$='#previous']").parent();
             previous._enableAria(state.currentIndex > 0);
-        }
+        }*/
 
         if (options.enableFinishButton && options.showFinishButtonAlways)
         {
+            previous._enableAria(state.stepCount > 1 && state.stepCount < (state.currentIndex + 2));
             finish._enableAria(state.stepCount > 0);
             next._enableAria(state.stepCount > 1 && state.stepCount > (state.currentIndex + 1));
-            previous._enableAria(state.stepCount > 1 && state.stepCount < (state.currentIndex + 2));
         }
         else
         {
+            previous._showAria(state.stepCount  === (state.currentIndex +2)||(options.enableFinishButton && state.stepCount === (state.currentIndex + 1)));
             finish._showAria(options.enableFinishButton && state.stepCount === (state.currentIndex + 1));
             next._showAria(state.stepCount === 0 || state.stepCount > (state.currentIndex + 1)).
                 _enableAria(state.stepCount > (state.currentIndex + 1) || !options.enableFinishButton);
-            previous._showAria(state.stepCount  === (state.currentIndex +2)||(options.enableFinishButton && state.stepCount === (state.currentIndex + 1)));
         }
     }
 }
@@ -1100,9 +1100,9 @@ function renderPagination(wizard, options, state)
         {
             buttons += buttonTemplate.format("previous", options.labels.previous);
         }*/
-
-        buttons += buttonTemplate.format("next", options.labels.next);
+        
         buttons += buttonTemplate.format("previous", options.labels.previous);
+        buttons += buttonTemplate.format("next", options.labels.next);
 
         if (options.enableFinishButton)
         {

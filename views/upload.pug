@@ -15,7 +15,7 @@ head
   .wizard-heading 上傳系統
   .wizard-v6-content
     .wizard-form
-      form#form-register.form-register(action='#' method='post')
+      form#form-register.form-register(action='/upload' method='post')
         #form-total
           // SECTION 1
           h2
@@ -25,35 +25,35 @@ head
           section
             .inner
               .form-heading
-                h3 個人資訊 (Personal Info)
+                h3 個人資訊
                 span 1/3
               .form-row
                 .form-holder
                   label.form-row-inner
-                    input#first_name.form-control(type='text' name='first_name' required='true' )
-                    span.label 名 (First Name)
+                    input#last_name.form-control(type='text' name='last_name' required='')
+                    span.label 姓
                 .form-holder
                   label.form-row-inner
-                    input#last_name.form-control(type='text' name='last_name' required='')
-                    span.label 姓 (Last Name)
+                    input#first_name.form-control(type='text' name='first_name' required='true' )
+                    span.label 名
               .form-row
                 .form-holder
                   label.form-row-inner
                     input#phone.form-control(type='text' name='phone' required='')
-                    span.label 電話 (Phone Number)
+                    span.label 電話
                 .form-holder
                   label.form-row-inner
                     input#id.form-control(type='text' name='id' required='')
-                    span.label 身分證字號 (ID)
+                    span.label 身分證字號
               .form-row
                 .form-holder
                   label.form-row-inner
-                    label.special-label(for='gender') 性別 (Gender):
+                    label.special-label(for='gender') 性別:
                     select#gender.form-control(name='gender')
                       option(value='男' selected='') 男
                       option(value='女') 女
                 .form-holder
-                  label.special-label-1(for='birth') 出生年月日 (Birthday)
+                  label.special-label-1(for='birth') 出生年月日
                   input#birth.day(type='text' name='birth' placeholder='請選擇日期')
                   span.select-btn
                     i.zmdi.zmdi-chevron-down
@@ -61,7 +61,7 @@ head
                 .form-holder.form-holder-2
                   label.form-row-inner
                     input#address.form-control(type='text' name='address' required='')
-                    span.label 拍攝地址 (Location)
+                    span.label 拍攝地址
           // SECTION 2
           h2
             p.step-icon
@@ -70,29 +70,32 @@ head
           section
             .inner
               .form-heading
-                h3 上傳影片 (Upload Video)
+                h3 上傳影片
                 span 2/3
               .form-row
                 .form-holder.form-holder-2
-                  label.special-label-1(for='types') 選擇檢測項目（Types）
+                  label.special-label-1(for='types') 選擇檢測項目
                   select#types.form-control(name='types')
-                    option(value='手指拍打' selected='') 手指拍打 (Finger Tapping)
-                    option(value='手掌握合') 手掌握合 (Finger Tapping)
-                    option(value='前臂迴旋') 前臂迴旋 (Finger Tapping)
-                    option(value='抬腳') 抬腳 (Finger Tapping)
+                    option(value='手指拍打' selected='') 手指拍打
+                    option(value='手掌握合') 手掌握合
+                    option(value='前臂迴旋') 前臂迴旋
+                    option(value='抬腳') 抬腳
                   span.select-btn
                     i.zmdi.zmdi-chevron-down
               .form-row
                 .form-holder.form-holder-2
-                  label.special-label-1(for='day') 上傳日期 (Upload Date)
+                  label.special-label-1(for='day') 上傳日期
                   input#day.day(type='text' name='day' placeholder='請選擇日期')
                   span.select-btn
                     i.zmdi.zmdi-chevron-down
               .form-row
                 .form-holder.form-holder-2
-                  label.special-label-2(for='video') 選擇影片 (Choose Video)
-                    input#video(name='video' style='display:none;' type='file' accept='video/x-msvideo,video/mp4,video/quicktime' required)
-                    i.zmdi.zmdi-cloud-upload 
+                  label.special-label-2(for='video') 選擇影片
+                    input#video(name='video' style='display:none;' type='file' onchange="readURL(this);" accept='video/x-msvideo,video/mp4,video/quicktime' required)
+                    i.zmdi.zmdi-cloud-upload
+              .form-row
+                .form-holder
+                  label.filename(for="videoname")
           // SECTION 3
           h2
             p.step-icon
@@ -101,34 +104,34 @@ head
           section
             .inner
               .form-heading
-                h3 確認資訊 (Comfirm Detail)
+                h3 確認資訊
                 span 3/3
               .table-responsive
                 table.table
                   tbody
                     tr.space-row
-                      th 全名 (Full Name):
+                      th 全名:
                       td#fullname-val
                     tr.space-row
-                      th 電話 (Phone Number):
+                      th 電話:
                       td#phone-val
                     tr.space-row
-                      th 性別 (Gender):
+                      th 性別:
                       td#gender-val
                     tr.space-row
-                      th 身分證字號 (ID):
+                      th 身分證字號:
                       td#id-val
                     tr.space-row
-                      th 出生年月日 (Birthday):
+                      th 出生年月日:
                       td#birth-val
                     tr.space-row
-                      th 拍攝地址 (Location):
+                      th 拍攝地址:
                       td#address-val
                     tr.space-row
-                      th 檢測項目 (Types):
+                      th 檢測項目:
                       td#types-val
                     tr.space-row
-                      th 上傳日期 (Upload Date):
+                      th 上傳日期:
                       td#day-val
 script(src='js/jquery-3.3.1.min.js')
 script(src='js/jquery.steps.js')
