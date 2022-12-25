@@ -73,8 +73,12 @@ app.use("/home", home);
 app.use("/upload", upload);
 app.use("/history", history);
 // start the server
-app.listen(process.env.APP_PORT, () => {
-  console.log(`Nodejs app listening on port ${process.env.APP_PORT}`);
+// app.listen(process.env.APP_PORT, () => {
+//   console.log(`Nodejs app listening on port ${process.env.APP_PORT}`);
+// });
+
+app.listen(50125, () => {
+  console.log(`Nodejs app listening on port 50125`);
 });
 
 /* the code here is for error handling, not implemented yet*/
