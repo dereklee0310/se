@@ -22,19 +22,19 @@ block content
               a.nav-link(href='/password')
                 span.align-text-bottom(data-feather='file')
                 |               變更密碼
-            li.nav-item
+            //- li.nav-item
               a.nav-link(href='#')
                 span.align-text-bottom(data-feather='shopping-cart')
                 |               Products
-            li.nav-item
+            //- li.nav-item
               a.nav-link(href='#')
                 span.align-text-bottom(data-feather='users')
                 |               Customers
-            li.nav-item
+            //- li.nav-item
               a.nav-link(href='#')
                 span.align-text-bottom(data-feather='bar-chart-2')
                 |               Reports
-            li.nav-item
+            //- li.nav-item
               a.nav-link(href='#')
                 span.align-text-bottom(data-feather='layers')
                 |               Integrations
@@ -61,15 +61,17 @@ block content
                 |               Year-end sale
       main.col-md-9.ms-sm-auto.col-lg-10.px-md-4
         .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
-          h1.h2 Dashboard
+          h1.h2 本次上傳結果
+        //- canvas#myChart.my-4.w-100(width='900' height='380')
+        iframe(width="900" height="800" frameborder="0" scrolling="no" src= url)
+        .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
           .btn-toolbar.mb-2.mb-md-0
-            .btn-group.me-2
-              button.btn.btn-sm.btn-outline-secondary(type='button') Share
-              button.btn.btn-sm.btn-outline-secondary(type='button') Export
-            button.btn.btn-sm.btn-outline-secondary.dropdown-toggle(type='button')
-              span.align-text-bottom(data-feather='calendar')
-              |             This week
-        canvas#myChart.my-4.w-100(width='900' height='380')
+              .btn-group.me-2
+                button.btn.btn-sm.btn-outline-secondary(type='button') Share
+                button.btn.btn-sm.btn-outline-secondary(type='button') Export
+              button.btn.btn-sm.btn-outline-secondary.dropdown-toggle(type='button')
+                span.align-text-bottom(data-feather='calendar')
+                |             This week
         div
           table.table.table-striped.table-sm
             thead
@@ -86,7 +88,15 @@ block content
                 td place
                 td time
                 td text
-        h2 Section title
+        h2 歷史上傳
+        .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+          .btn-toolbar.mb-2.mb-md-0
+              .btn-group.me-2
+                button.btn.btn-sm.btn-outline-secondary(type='button') Share
+                button.btn.btn-sm.btn-outline-secondary(type='button') Export
+              button.btn.btn-sm.btn-outline-secondary.dropdown-toggle(type='button')
+                span.align-text-bottom(data-feather='calendar')
+                |             This week
         .table-responsive
           table.table.table-striped.table-sm
             thead
@@ -196,3 +206,8 @@ block content
   script(src='https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js')
   script.
     feather.replace()
+    plotly.plot(data, graphOptions, function (err, msg) {
+      var a = msg.url + ".embed";
+      res.render('index',{url:a});
+      //console.log(msg.url);
+    });

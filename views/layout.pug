@@ -70,10 +70,15 @@ html
               a.nav-link(href='/#aboutus') 關於我們
             li.nav-item.px-3
               a.nav-link(href='/#contactus') 聯絡我們
-          if login === 'false'    
+          if login !== 'true'
+            ul#login.nav-item.mb-2.mb-md-0(style='display: block;')
+              a.btn.btn-dark.nav-light.btn-outline-secondary(type='button' href='/account/login' aria-expanded='false' data-bs-display='static')
+                | 登入
+          else
             ul#hello.nav-item.dropdown.mb-2.mb-md-0(style='display: block;')
               button.btn.btn-dark.nav-light.dropdown-toggle.btn-outline-secondary(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
-                | ooo您好
+                | #{user.last_name + user.first_name} 
+                  
               ul.dropdown-menu.dropdown-menu-end
                 li
                   a.dropdown-item(href='/account/info') 個人資料
@@ -83,14 +88,15 @@ html
                   a.dropdown-item(href='/account/password') 變更密碼
                 //- li
                 //-   a.dropdown-item(href='/patient') 病患資料
-                li#logout
-                  a.dropdown-item(href='/logout') 登出
-                //- li#logout
-                  input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/account/logout')
-          else
-            ul#login.nav-item.mb-2.mb-md-0
-              button.btn.btn-dark.nav-light.btn-outline-secondary(type='button' onclick="location.href='/login'" aria-expanded='false' data-bs-display='static')
-                | 登入
+                li#logout(style='display: block;')
+                  //- input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/account/logout')
+                  a.dropdown-item(href='/account/logout') 登出
+          //- if logout === 'true'
+          //-   <script>alert('您已成功登出!')</script>
+          //- if msg === 'justLogout'
+          //-   <script>alert('您已成功登出!')</script>
+          //- else if msg === 'signupSuccess'
+          //-   <script>alert('註冊成功! 點擊右上方的按鈕以登入')</script>
   main
     block content
   footer.container.bg-light.footer

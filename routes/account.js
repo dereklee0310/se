@@ -42,7 +42,7 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', (req, res) => {
   pool.query(
-    `select user_id from user where email = '${req.body.email}'`,
+    `select user_id from user where email = "${req.body.email}"`,
     function (err, results) {
       if (err)
         throw err
@@ -53,7 +53,7 @@ router.post('/signup', (req, res) => {
       hash_val = bcrypt.hashSync(req.body.password, 10); //todo change this into async
       pool.query(
         'insert into user' +
-        ` values(NULL, '${req.body.first_name}', '${req.body.last_name}', '${req.body.email}', '${hash_val}', '${req.body.pid}', '${req.body.gender}', '${req.body.birth}', default)`,
+        ` values(NULL, "${req.body.first_name}", "${req.body.last_name}", "${req.body.email}", "${hash_val}", "${req.body.pid}", "${req.body.gender}", "${req.body.birth}", default)`,
         function (err, results) {
           if (err)
             throw err;
@@ -81,7 +81,9 @@ router.post('/recover', (req, res) => {
     }
     var password = Math.random().toString(36).slice(-8);
     hash_val = bcrypt.hashSync(password, 10); //todo change this into async
-    pool.query(`update user set password = '${hash_val}' where email = '${req.body.email}'`, function (err, results) {
+    pool.query(`update user set password = "${hash_val}" where user_id = "${results[0].user_id}"`, function (err, results) {  // only double quote work here
+      if(err)
+        throw err
       var mailOptions = {
         from: 'parkinson.se.test@gmail.com',
         to: `${req.body.email}`,
@@ -103,7 +105,7 @@ router.get('/password', ensureAuthenticated, (req, res) => {
 
 router.post('/password', ensureAuthenticated, (req, res) => {
   hash_val = bcrypt.hashSync(req.body.new_password, 10); //todo change this into async
-  pool.query(`update user set password = '${hash_val}' where email = '${req.user.email}'`, function (err, results) {
+  pool.query(`update user set password = "${hash_val}" where email = "${req.user.email}"`, function (err, results) {
     res.redirect('/home?changePassword=true')
   })
 });

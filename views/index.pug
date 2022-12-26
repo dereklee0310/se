@@ -1,130 +1,94 @@
-doctype html
-head
+extends layout
+block head
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1')
   meta(name='description' content='')
   meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
   meta(name='generator' content='Hugo 0.84.0')
-  title Carousel Template &middot; Bootstrap v5.2
   link(rel='canonical' href='https://getbootstrap.com/docs/5.2/examples/carousel/')
   // Bootstrap core CSS
   link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
-  style.
-    .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    }
-    @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-    }
-    }
-    .b-example-divider {
-    height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
-    border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-    .b-example-vr {
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 100vh;
-    }
-    .bi {
-    vertical-align: -.125em;
-    fill: currentColor;
-    }
-    .nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
-    }
-    .nav-scroller .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: 1rem;
-    margin-top: -1px;
-    overflow-x: auto;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    }
   // Custom styles for this template
   link(href='/css/index.css' rel='stylesheet')
-header
-  nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
-    .container-fluid
-      a.navbar-brand(href='/') 首頁
-        //- img(src='images/logo.png' width='30' height='30' style='border-radius: 10px;')
-      #navbarCollapse.collapse.navbar-collapse
-        ul.navbar-nav.me-auto.mb-2.mb-md-0.px-3
-          li.nav-item.px-3
-            a.nav-link(aria-current='page' href='/upload') 開始檢測
-          li.nav-item.px-3
-            a.nav-link(href='/history') 檢測紀錄
-          li.nav-item.px-3
-            a.nav-link(href='#aboutus') 關於我們
-        if login !== 'true'
-          ul#login.nav-item.mb-2.mb-md-0(style='display: block;')
-            a.btn.btn-dark.nav-light.btn-outline-secondary(type='button' href='/account/login' aria-expanded='false' data-bs-display='static')
-              | 登入
-        else
-          ul#hello.nav-item.dropdown.mb-2.mb-md-0(style='display: block;')
-            button.btn.btn-dark.nav-light.dropdown-toggle.btn-outline-secondary(type='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-display='static')
-              | #{user.last_name + user.first_name} 
-                
-            ul.dropdown-menu.dropdown-menu-end
-              li
-                a.dropdown-item(href='/account/info') 個人資料
-              li
-                a.dropdown-item(href='/history') 檢測紀錄
-              li
-                a.dropdown-item(href='/account/password') 變更密碼
-              //- li
-              //-   a.dropdown-item(href='/patient') 病患資料
-              li#logout(style='display: block;')
-                //- input.dropdown-item(type='button' onclick='Buttontoggle();' value='登出' href='/account/logout')
-                a.dropdown-item(href='/account/logout') 登出
-        //- if logout === 'true'
-        //-   <script>alert('您已成功登出!')</script>
-        //- if msg === 'justLogout'
-        //-   <script>alert('您已成功登出!')</script>
-        //- else if msg === 'signupSuccess'
-        //-   <script>alert('註冊成功! 點擊右上方的按鈕以登入')</script>
-main
+  style.
+      .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      }
+      @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+      }
+      }
+      .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+      .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+      }
+      .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+      }
+      .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+      }
+      .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      }
+block title
+  title Carousel Template
+block content
   #myCarousel.carousel.slide(data-bs-ride='true')
     .carousel-indicators
       button.active(type='button' data-bs-target='#myCarousel' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1')
       button(type='button' data-bs-target='#myCarousel' data-bs-slide-to='1' aria-label='Slide 2')
       button(type='button' data-bs-target='#myCarousel' data-bs-slide-to='2' aria-label='Slide 3')
     .carousel-inner
-      .carousel-item.active
-        svg.bd-placeholder-img(width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' preserveaspectratio='xMidYMid slice' focusable='false')
+      .carousel-item.active( width='auto' height='50%')
+        //- svg.bd-placeholder-img(width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' preserveaspectratio='xMidYMid slice' focusable='false')
           rect(width='100%' height='100%' fill='#777')
-        .container
+        img.mb-4(src='/images/parkinsons_symptoms.jpg' alt='' )
+        //- .container
           .carousel-caption.text-start
             h1 Example headline.
             p Some representative placeholder content for the first slide of the carousel.
             p
               a.btn.btn-lg.btn-primary(href='#') Sign up today
       .carousel-item
-        svg.bd-placeholder-img(width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' preserveaspectratio='xMidYMid slice' focusable='false')
+        //- svg.bd-placeholder-img(width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' preserveaspectratio='xMidYMid slice' focusable='false')
           rect(width='100%' height='100%' fill='#777')
-        .container
+        img.mb-4(src='/images/parkinsons_warning_signs.png' alt='' )
+        //- .container
           .carousel-caption
             h1 Another example headline.
             p Some representative placeholder content for the second slide of the carousel.
             p
               a.btn.btn-lg.btn-primary(href='#') Learn more
       .carousel-item
-        svg.bd-placeholder-img(width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' preserveaspectratio='xMidYMid slice' focusable='false')
+        //- svg.bd-placeholder-img(width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' preserveaspectratio='xMidYMid slice' focusable='false')
           rect(width='100%' height='100%' fill='#777')
-        .container
+        img.mb-4(src='/images/parkinsons_stages.png' alt='' )
+        //- .container
           .carousel-caption.text-end
             h1 One more for good measure.
             p Some representative placeholder content for the third slide of this carousel.
@@ -144,34 +108,28 @@ main
     // Three columns of text below the carousel
     .row.row-cols-3
       .col.border.border-secondary.border-4(style='border-radius: 40px;')
-        svg.bd-placeholder-img.rounded-circle(width='140' height='140' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 140x140' preserveaspectratio='xMidYMid slice' focusable='false')
+        //- svg.bd-placeholder-img.rounded-circle(width='140' height='140' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 140x140' preserveaspectratio='xMidYMid slice' focusable='false')
           title Placeholder
-          rect(width='100%' height='100%' fill='#777')
-          text(x='50%' y='50%' fill='#777' dy='.3em') 140x140
+          rect(width='100%' height='100%' fill='#777' src='/images/video.png' alt='')
+        img.rounded-circle(width='140' height='140' src='/images/video.png')
         h2.fw-normal 上傳檢測影片
         p
-          | Some representative placeholder content for the three columns of text below the carousel. This is the first column.
+          | 透過"開始上傳影片"來上傳你的檢測影片，本系統會根據影片內容判斷患者的帕金森氏嚴重程度，便顯示資料給用戶。
         p.click 
           a.btn.btn-secondary.btn-lg(href='/upload') 開始上傳影片 &raquo;
       // /.col-lg-4
       .col.border.border-secondary.border-4(style='border-radius: 40px;')
-        svg.bd-placeholder-img.rounded-circle(width='140' height='140' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 140x140' preserveaspectratio='xMidYMid slice' focusable='false')
-          title Placeholder
-          rect(width='100%' height='100%' fill='#777')
-          text(x='50%' y='50%' fill='#777' dy='.3em') 140x140
+        img.rounded-circle(width='140' height='140' src='/images/history.png')
         h2.fw-normal 檢視歷史上傳
         p
-          | Another exciting bit of representative placeholder content. This time, we&apos;ve moved on to the second column.
+          | 透過"查看檢測紀錄"來瀏覽上傳的歷史紀錄，能夠將之前的上傳紀錄一一呈現在用戶前，並且可以持續追蹤。
         p.click 
           a.btn.btn-secondary.btn-lg(href='/history') 查看檢測紀錄 &raquo;
       // /.col-lg-4
       .col.border.border-secondary.border-4(style='border-radius: 40px;')
-        svg.bd-placeholder-img.rounded-circle(width='140' height='140' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 140x140' preserveaspectratio='xMidYMid slice' focusable='false')
-          title Placeholder
-          rect(width='100%' height='100%' fill='#777')
-          text(x='50%' y='50%' fill='#777' dy='.3em') 140x140
+        img.rounded-circle(width='140' height='140' src='/images/about_us.png')
         h2.fw-normal 關於我們
-        p And lastly this, the third column of representative placeholder content.
+        p 透過"更多資訊"可以得到關於本軟體的更多情報，包含本產品的"功能"，以及所使用到的"技術"，亦可獲得"醫院"相關情報。
         p.click
           a.btn.btn-secondary.btn-lg(href='aboutus') 更多資訊 &raquo;
       // /.col-lg-4
@@ -185,42 +143,33 @@ main
     .row.featurette
       .col-md-7
         h2.featurette-heading.fw-normal.lh-1
-          | First featurette heading. 
-          span.text-muted It&rsquo;ll blow your mind.
+          | 功能
+          
         p.lead
-          | Some great placeholder content for the first featurette here. Imagine some exciting prose here.
+          | 用戶透過"上傳檢測影片"來上傳影像資料，我們便會開始偵測用戶帕金森氏症的病況，並告知用戶當前處在第幾期，如果用戶想追蹤之前的檢測情況，也可以透過"檢查歷史上傳"來查看歷史紀錄，有任何疑問也可以透過"Contact US"來聯絡我們
       .col-md-5
-        svg.bd-placeholder-img.bd-placeholder-img-lg.featurette-image.img-fluid.mx-auto(width='500' height='500' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 500x500' preserveaspectratio='xMidYMid slice' focusable='false')
-          title Placeholder
-          rect(width='100%' height='100%' fill='#eee')
-          text(x='50%' y='50%' fill='#aaa' dy='.3em') 500x500
+        img.mb-4(src='/images/about_us_1.png' alt='' height='93%' width='75%')
     hr.featurette-divider
     .row.featurette
       .col-md-7.order-md-2
         h2.featurette-heading.fw-normal.lh-1
-          | Oh yeah, it&rsquo;s that good. 
-          span.text-muted See for yourself.
+          | 技術
         p.lead
-          | Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.
+          | 本檢測系統以"JavaScript"作為程式語言架構，頁面是透過"JavaScript"裡的開放原始碼"node js"裡面的"express"功能渲染而成，後端數據庫則是透過"mysql"來建構而成，影片檢測則是透過"openpose"配合演算法來偵測患者的嚴重程度。
       .col-md-5.order-md-1
-        svg.bd-placeholder-img.bd-placeholder-img-lg.featurette-image.img-fluid.mx-auto(width='500' height='500' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 500x500' preserveaspectratio='xMidYMid slice' focusable='false')
-          title Placeholder
-          rect(width='100%' height='100%' fill='#eee')
-          text(x='50%' y='50%' fill='#aaa' dy='.3em') 500x500
+        img.mb-4(src='/images/about_us_2.png' alt='' height='85%' width='60%')
     hr.featurette-divider
     .row.featurette
       .col-md-7
         h2.featurette-heading.fw-normal.lh-1
-          | And lastly, this one. 
-          span.text-muted Checkmate.
+          | 醫院
         p.lead
-          | And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.
+          | 留給以後合作的醫院更改
       .col-md-5
-        svg.bd-placeholder-img.bd-placeholder-img-lg.featurette-image.img-fluid.mx-auto(width='500' height='500' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Placeholder: 500x500' preserveaspectratio='xMidYMid slice' focusable='false')
-          title Placeholder
-          rect(width='100%' height='100%' fill='#eee')
-          text(x='50%' y='50%' fill='#aaa' dy='.3em') 500x500
+        img.mb-4(src='/images/about_us_3.png' alt='' height='94%' width='85%')
+    hr.featurette-divider
     // /END THE FEATURETTES
+
     hr#contactus.featurette-divider
     .container.contact_us
       .row.justify-content-center
@@ -235,40 +184,57 @@ main
                   h3.mb-4 聯絡我們
                   #form-message-warning.mb-4
                   #form-message-success.mb-4
-                    if msg === 'sent'
-                      .alert.alert-info 信件已送出，感謝您的寶貴意見!
-                  form#contactForm.contactForm(action='/contactus' method='POST' name='contactForm')
+                    #sent.alert.alert-info(style='display:none;') 信件已送出，感謝您的寶貴意見!
+                  form#contactForm.contactForm(enctype='text/plain' accept-charset='utf-8' onload='init()')
                     .row
-                      .col-md-6
-                        .form-group
+                      .col-md-6.py-3
+                        .form-floating
+                          input#nameText.form-control(type='text' placeholder='Name' name="name" required)
                           label.label(for='name') 姓名
-                          input#name.form-control(type='text' name='name' placeholder='Name' required)
-                      .col-md-6
-                        .form-group
+                      .col-md-6.py-3
+                        .form-floating
+                          input#emailText.form-control(type='email' name='email' placeholder='Email' required)
                           label.label(for='email') 您的電子郵件地址
-                          input#email.form-control(type='email' name='email' placeholder='Email' required)
-                      .col-md-12
-                        .form-group
+                      .col-md-12.py-3
+                        .form-floating
+                          input#subText.form-control(type='text' name='subject' placeholder='Subject' required)
                           label.label(for='subject') 主旨
-                          input#subject.form-control(type='text' name='subject' placeholder='Subject' required)
-                      .col-md-12
-                        .form-group
+                      .col-md-12.py-3
+                        .form-floating
+                          textarea#bodyText.form-control(name='message' cols='30' rows='4' placeholder='Message' required style="height: 256px;")
                           label.label(for='message') 問題與意見
-                          textarea#message.form-control(name='message' cols='30' rows='4' placeholder='Message' required)
-                      .col-md-12
-                        .form-group
-                          input.btn.btn-primary(type='submit' value='Send Message')
-                          .submitting
+                      .col-md-12.py-3
+                        .form-floating
+                          input.btn.btn-primary(type='submit' value='送出信息' onclick='submitHandler();')
+                          a#mailTo
     hr.featurette-divider
-  // /.container
-  // FOOTER
-  footer.container.bg-light
-    p.float-end
-      a(href='#') Back to top
-    p
-      | &copy; 2022 CCU CSIE.All rights reserved &middot; 
-      a(href='#') Privacy
-      |  &middot; 
-      a(href='#') Terms
-script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous')
-script(src='https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js')
+  script.
+    //宣告預設表單內容為空 （你想要的話也可以加東西）
+    var initSubject='',initBody='';
+    //按下傳送按鈕後執行
+    function submitHandler(){
+      var to = "contact@example.com";//寫死的傳送對象 就是公司的信箱 不會顯示在網頁上
+      var name = nameText.value;//讀取ID為 nameTextuser 物件中的值
+      var email = emailText.value;
+      var subject = subText.value;
+    //把user填的資料都塞到 mail body 中
+      var body = ""+bodyText.value+'%0A%0A%0A';//%0A是換行 換了三行
+          body += "From:"+nameText.value+'%0A';
+          body += "Email:"+emailText.value+'%0A';
+    //傳送的主要程式碼
+      mailTo.href="mailto:"+to+"?subject="+subject+"&body="+body;
+      mailTo.click();
+      console.log(mailTo.href);
+      show();
+    }
+    //在body onload
+    function init(){
+      subText.value=initSubject;
+      toText.value=initTo;
+      bodyText.value=initBody;
+    }
+    function show(){
+      var element1 = document.getElementById("sent");
+      element1.style.display = "block";
+    }
+

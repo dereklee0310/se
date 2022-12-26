@@ -33,24 +33,6 @@ body {
   border-radius: 20px;
 }
 
-.name {
-  height: 70px;
-}
-
-.name1 {
-  width: 45%;
-  display:inline-block;
-  position: absolute;
-  left: 0px;
-}
-
-.name2 {
-  width: 45%;
-  display:inline-block;
-  position: absolute;
-  right: 0px;
-}
-
 .btn {
   /* display: inline-block; */
   width: 148px;

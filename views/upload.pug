@@ -15,7 +15,7 @@ head
   .wizard-heading 上傳系統
   .wizard-v6-content
     .wizard-form
-      form#form-register.form-register(action='/upload' method='post')
+      form#form-register.form-register(action='#' method='post')
         #form-total
           // SECTION 1
           h2
@@ -30,38 +30,33 @@ head
               .form-row
                 .form-holder
                   label.form-row-inner
-                    input#last_name.form-control(type='text' name='last_name' required='')
-                    span.label 姓
+                    input#first_name.form-control(type='text' name='first_name' required='true' )
+                    span.label 名:
                 .form-holder
                   label.form-row-inner
-                    input#first_name.form-control(type='text' name='first_name' required='true' )
-                    span.label 名
+                    input#last_name.form-control(type='text' name='last_name' required='')
+                    span.label 姓:
               .form-row
-                .form-holder
+                //.form-holder
                   label.form-row-inner
                     input#phone.form-control(type='text' name='phone' required='')
                     span.label 電話
-                .form-holder
+                .form-holder.form-holder-2
                   label.form-row-inner
                     input#id.form-control(type='text' name='id' required='')
-                    span.label 身分證字號
+                    span.label 身分證字號:
               .form-row
                 .form-holder
                   label.form-row-inner
                     label.special-label(for='gender') 性別:
                     select#gender.form-control(name='gender')
-                      option(value='男' selected='') 男
-                      option(value='女') 女
+                      option(value='Male' selected='') 男
+                      option(value='Female') 女
                 .form-holder
-                  label.special-label-1(for='birth') 出生年月日
+                  label.special-label-1(for='birth') 出生年月日:
                   input#birth.day(type='text' name='birth' placeholder='請選擇日期')
                   span.select-btn
                     i.zmdi.zmdi-chevron-down
-              .form-row
-                .form-holder.form-holder-2
-                  label.form-row-inner
-                    input#address.form-control(type='text' name='address' required='')
-                    span.label 拍攝地址
           // SECTION 2
           h2
             p.step-icon
@@ -74,17 +69,22 @@ head
                 span 2/3
               .form-row
                 .form-holder.form-holder-2
-                  label.special-label-1(for='types') 選擇檢測項目
+                  label.special-label-1(for='types') 選擇檢測項目:
                   select#types.form-control(name='types')
-                    option(value='手指拍打' selected='') 手指拍打
-                    option(value='手掌握合') 手掌握合
-                    option(value='前臂迴旋') 前臂迴旋
-                    option(value='抬腳') 抬腳
+                    option(value='finger tap' selected='') 手指拍打
+                    option(value='palm grip') 手掌握合
+                    option(value='forearm rotation') 前臂迴旋
+                    option(value='lift feet') 抬腳
                   span.select-btn
                     i.zmdi.zmdi-chevron-down
               .form-row
                 .form-holder.form-holder-2
-                  label.special-label-1(for='day') 上傳日期
+                  label.form-row-inner
+                    input#address.form-control(type='text' name='address' required='')
+                    span.label 拍攝地址:
+              .form-row
+                .form-holder.form-holder-2
+                  label.special-label-1(for='day') 拍攝日期:
                   input#day.day(type='text' name='day' placeholder='請選擇日期')
                   span.select-btn
                     i.zmdi.zmdi-chevron-down
@@ -93,9 +93,6 @@ head
                   label.special-label-2(for='video') 選擇影片
                     input#video(name='video' style='display:none;' type='file' onchange="readURL(this);" accept='video/x-msvideo,video/mp4,video/quicktime' required)
                     i.zmdi.zmdi-cloud-upload
-              .form-row
-                .form-holder
-                  label.filename(for="videoname")
           // SECTION 3
           h2
             p.step-icon
@@ -113,9 +110,6 @@ head
                       th 全名:
                       td#fullname-val
                     tr.space-row
-                      th 電話:
-                      td#phone-val
-                    tr.space-row
                       th 性別:
                       td#gender-val
                     tr.space-row
@@ -131,8 +125,11 @@ head
                       th 檢測項目:
                       td#types-val
                     tr.space-row
-                      th 上傳日期:
+                      th 拍攝日期:
                       td#day-val
+                    tr.space-row
+                      th 影片名稱:
+                      td#video-val
 script(src='js/jquery-3.3.1.min.js')
 script(src='js/jquery.steps.js')
 script(src='js/jquery-ui.min.js')

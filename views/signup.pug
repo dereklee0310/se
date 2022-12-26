@@ -1,63 +1,37 @@
-doctype html
-html
-	head
-		meta(charset='utf-8')
-		meta(name='viewport' content='width=device-width, initial-scale=1')
-		meta(name='description' content='')
-		meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
-		meta(name='generator' content='Hugo 0.84.0')
-		title 註冊 | 帕金森氏症雲端檢測服務
-		link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
-		// Bootstrap core CSS
-		link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
-		style.
-			.bd-placeholder-img {
-			font-size: 1.125rem;
-			text-anchor: middle;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			user-select: none;
-			}
-			@media (min-width: 768px) {
-			.bd-placeholder-img-lg {
-			font-size: 3.5rem;
-			}
-			}
-		// Custom styles for this template
-		link(href='/css/signup.css' rel='stylesheet')
-		// after convert html to pug, the body tag disappear
-		// add "body.text-center", otherwise the elements in form will not be aligned
+extends layout
+block head
+	link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
+	link(href='/css/signup.css' rel='stylesheet')
+block title
+	title 註冊 | 帕金森氏症雲端檢測服務
+block content
 	body.text-center
 		main.form-register
 			form(action='/account/signup' method='post')
 				h1.h4.mb-3.fw-normal 註冊
 				.form-floating.name
-					.form-floating.name2
-						input#name2.form-control(type='text' placeholder='name2' name='first_name' required='')
-						label(for='name2') 名
-					.form-floating.name1
-						input#name1.form-control(type='text' placeholder='name1' name='last_name' required='')
-						label(for='name1') 姓
+					input#name.form-control(type='text' placeholder='name' name='name' required)
+					label(for='name') 姓名
 				.form-floating
-					input#email.form-control(type='email' placeholder='email' name='email' required='')
-					label(for='email') 帳號名稱(電子郵件)
+					input#email.form-control(type='email' placeholder='email' name='email' required)
+					label(for='email') 帳號(電子郵件)
 				if msg === 'failed'
 					.alert.alert-danger 該帳號(電子郵件)已存在
 				.form-floating
-					input#password.form-control(type='password' placeholder='Password' name='password' required='')
+					input#password.form-control(type='password' placeholder='Password' name='password' required)
 					label(for='password') 密碼
 				.form-floating
-					input#ID.form-control(type='text' placeholder='pid' name='pid' required='')
+					input#pid.form-control(type='text' placeholder='pid' name='pid' required)
 					label(for='pid') 身分證字號
 				.form-floating
-					select#gender.form-control(name='gender' required='')
-						option(value='' disabled='disabled' selected='true') 請選擇您的性別
+					select#gender.form-control(name='gender' required)
+						option(value='' disabled selected) 請選擇您的性別
 						option(value='female') 男
 						option(value='male') 女
 						option(value='third_gender') 第三性別
 					label(for='gender') 性別
 				.form-floating
-					input#birthday.form-control(type='date' placeholder='birth' name='birth' required='')
+					input#birthday.form-control(type='date' placeholder='birth' name='birth' required)
 					label(for='birth') 出生年月日
 				a.btn.cancel.btn-lg.btn-primary(href='/account/login') 取消
 				button.btn.chg.btn-lg.btn-primary(type='submit') 註冊

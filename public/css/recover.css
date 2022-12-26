@@ -11,7 +11,7 @@ body {
   background-color: #f5f5f5;
 }
 
-.form-recover {
+.form-register {
   border-radius: 25px;
   border: 2px solid #000;
   /* background-color: #d8d8d8; */
@@ -21,11 +21,11 @@ body {
   margin: auto;
 }
 
-.form-recover .form-floating:focus-within {
+.form-register .form-floating:focus-within {
   z-index: 2;
 }
 
-.form-recover input{
+.form-register input{
   margin-top: 10px;
   margin-bottom: 10px;
   /* border-top-left-radius: 0;

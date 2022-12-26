@@ -1,53 +1,27 @@
-doctype html
-html
-	head
-		meta(charset='utf-8')
-		meta(name='viewport' content='width=device-width, initial-scale=1')
-		meta(name='description' content='')
-		meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
-		meta(name='generator' content='Hugo 0.84.0')
-		title 用戶資訊 | 帕金森氏症雲端檢測服務
-		link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
-		// Bootstrap core CSS
-		link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
-		style.
-			.bd-placeholder-img {
-			font-size: 1.125rem;
-			text-anchor: middle;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			user-select: none;
-			}
-			@media (min-width: 768px) {
-			.bd-placeholder-img-lg {
-			font-size: 3.5rem;
-			}
-			}
-		// Custom styles for this template
-		link(href='/css/info.css' rel='stylesheet')
-		// after convert html to pug, the body tag disappear
-		// add "body.text-center", otherwise the elements in form will not be aligned
+extends layout
+block head
+	link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
+	link(href='/css/info.css' rel='stylesheet')
+block title
+	title 用戶資訊 | 帕金森氏症雲端檢測服務
+block content
 	body.text-center
 		main.form-register
 			form(action='#' method='post')
 				h1.h4.mb-3.fw-normal 用戶資訊
 				.form-floating.name
-					.form-floating.name1
-						input#name1.form-control(type='text' placeholder='first_name' name='first_name' disabled='')
-						label(for='first_name') 名字: #{first_name}
-					.form-floating.name2
-						input#name2.form-control(type='text' placeholder='last_name' name='last_name' disabled='')
-						label(for='last_name') 姓氏: #{last_name}
+					input#name.form-control(type='text' placeholder='name' name='name' disabled)
+					label(for='name') 姓名: #{name}
 				.form-floating
-					input#email.form-control(type='email' placeholder='email' name='email' disabled='')
+					input#email.form-control(type='email' placeholder='email' name='email' disabled)
 					label(for='email') 帳號: #{email}
 				.form-floating
-					input#ID.form-control(type='text' placeholder='pid' name='pid' disabled='')
+					input#ID.form-control(type='text' placeholder='pid' name='pid' disabled)
 					label(for='pid') 身份證字號: #{pid}
 				.form-floating
-					input#gender.form-control(type='text' placeholder='gender' name='gender' disabled='')
+					input#gender.form-control(type='text' placeholder='gender' name='gender' disabled)
 					label(for='gender') 性別: #{gender}
 				.form-floating
-					input#birthday.form-control(type='text' placeholder='birth' name='birth' disabled='')
+					input#birthday.form-control(type='text' placeholder='birth' name='birth' disabled)
 					label(for='birth') 出生年月日: #{birth}
 				a.btn.cancel.btn-lg.btn-primary(onclick="history.back()") 返回

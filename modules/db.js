@@ -23,6 +23,16 @@ var pool = mysql.createPool({
   database: 'se', // database name
 });
 
+// pool.query("delete from upload_record where first_name = '明翰'", function(err, results) {
+//   console.log('set ok!')
+// })
+
+// pool.query(`update user set gender = 'male' where email = 'dereklee0310@gmail.com';`, function (err, results) {
+//   console.log('aslf;jhsaeoifewporfewr')
+//   if(err)
+//     throw err
+// })
+
 module.exports = {
     mysql, pool
 };

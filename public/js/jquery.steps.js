@@ -278,7 +278,7 @@ function destroy(wizard, options)
 function finishStep(wizard, state)
 {
     var currentStep = wizard.find(".steps li").eq(state.currentIndex);
-
+    
     if (wizard.triggerHandler("finishing", [state.currentIndex]))
     {
         currentStep.addClass("done").removeClass("error");
@@ -460,18 +460,14 @@ function goToNextStep(wizard, options, state)
     {
         var fname = $(first_name).val();
         var lname = $(last_name).val();
-        var ph = $(phone).val();
         var humanid = $(id).val();
-        var addr = $(address).val();
         var date = $(birth).val();
         fname = $.trim(fname);
         lname = $.trim(lname);
-        ph = $.trim(ph);
         humanid = $.trim(humanid);
-        addr = $.trim(addr);
         date = $.trim(date);
 
-        if(fname == '' || lname == '' || ph == '' || humanid == '' || addr == '' || date == '')
+        if(fname == '' || lname == ''|| humanid == '' || date == '')
         {
             alert('輸入不能為空');
         }
@@ -483,8 +479,17 @@ function goToNextStep(wizard, options, state)
     else if(state.currentIndex == 1)
     {
         var date = $(day).val();
+        var addr = $(address).val();
+        var file = $("#video").val();
+        var fileName = getFileName(file);
+        function getFileName(o){
+            var pos=o.lastIndexOf("\\");
+            return o.substring(pos+1);  
+        }
+        fileName = $.trim(fileName);
+        addr = $.trim(addr);
         date = $.trim(date);
-        if(date == '')
+        if(date == '' || addr == '' || fileName == '')
         {
             alert('輸入不能為空');
         }
@@ -829,7 +834,13 @@ function paginationClickHandler(event)
             break;
 
         case "finish":
-            finishStep(wizard, state);
+            var formdata = $('#form-register').serialize();
+            var file = $('#video').val();
+            $('#finish').click(function(){
+                $.post('/upload', {formdata, "file": file}, function(data) {
+                    alert('上傳成功');
+                }, 'json');
+            });
             break;
 
         case "next":
@@ -841,7 +852,6 @@ function paginationClickHandler(event)
             break;
     }
 }
-
 /**
  * Refreshs the visualization state for the entire pagination.
  *
@@ -855,7 +865,7 @@ function paginationClickHandler(event)
 function refreshPagination(wizard, options, state)
 {
     if (options.enablePagination)
-    {   
+    {
         var finish = wizard.find(".actions a[href$='#finish']").parent(),
             previous = wizard.find(".actions a[href$='#previous']").parent(),
             next = wizard.find(".actions a[href$='#next']").parent();
@@ -1100,7 +1110,7 @@ function renderPagination(wizard, options, state)
         {
             buttons += buttonTemplate.format("previous", options.labels.previous);
         }*/
-        
+
         buttons += buttonTemplate.format("previous", options.labels.previous);
         buttons += buttonTemplate.format("next", options.labels.next);
 
@@ -1996,7 +2006,7 @@ var defaults = $.fn.steps.defaults = {
      * @for defaults
      **/
     onInit: function (event, currentIndex) { },
-
+    
     /**
      * Contains all labels. 
      *
