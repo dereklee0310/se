@@ -1,37 +1,37 @@
 extends layout
 block head
-	link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
-	link(href='/css/signup.css' rel='stylesheet')
+  link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
+  link(href='/css/signup.css' rel='stylesheet')
 block title
-	title 註冊 | 帕金森氏症雲端檢測服務
+  title 註冊 | 帕金森氏症雲端檢測服務
 block content
-	body.text-center
-		main.form-register
-			form(action='/account/signup' method='post')
-				h1.h4.mb-3.fw-normal 註冊
-				.form-floating.name
-					input#name.form-control(type='text' placeholder='name' name='name' required)
-					label(for='name') 姓名
-				.form-floating
-					input#email.form-control(type='email' placeholder='email' name='email' required)
-					label(for='email') 帳號(電子郵件)
-				if msg === 'failed'
-					.alert.alert-danger 該帳號(電子郵件)已存在
-				.form-floating
-					input#password.form-control(type='password' placeholder='Password' name='password' required)
-					label(for='password') 密碼
-				.form-floating
-					input#pid.form-control(type='text' placeholder='pid' name='pid' required)
-					label(for='pid') 身分證字號
-				.form-floating
-					select#gender.form-control(name='gender' required)
-						option(value='' disabled selected) 請選擇您的性別
-						option(value='female') 男
-						option(value='male') 女
-						option(value='third_gender') 第三性別
-					label(for='gender') 性別
-				.form-floating
-					input#birthday.form-control(type='date' placeholder='birth' name='birth' required)
-					label(for='birth') 出生年月日
-				a.btn.cancel.btn-lg.btn-primary(href='/account/login') 取消
-				button.btn.chg.btn-lg.btn-primary(type='submit') 註冊
+  div#cover.text-center
+    .form-signup
+      form(action='/account/signup' method='post')
+        h1.h4.mb-3.fw-normal 註冊
+        .form-floating
+          input#name.form-control(type='text' placeholder='name' name='name' required)
+          label(for='name') 姓名
+        .form-floating
+          input#email.form-control(type='email' placeholder='email' name='email' required)
+          label(for='email') 帳號(電子郵件)
+        if msg === 'failed'
+          .alert.alert-danger 該帳號(電子郵件)已存在
+        .form-floating
+          input#password.form-control(type='password' placeholder='Password' name='password' required)
+          label(for='password') 密碼
+        .form-floating
+          input#pid.form-control(type='text' placeholder='pid' name='pid' required)
+          label(for='pid') 身分證字號
+        .form-floating
+          select#gender.form-control(name='gender' required)
+            option(value='' disabled selected) 請選擇您的性別
+            option(value='男') 男
+            option(value='女') 女
+            option(value='第三性別') 第三性別
+          label(for='gender') 性別
+        .form-floating
+          input#birthday.form-control(type='date' placeholder='birth' name='birth' required)
+          label(for='birth') 出生年月日
+        a#button.btn.cancel.btn-lg.btn-primary(href='/account/login') 取消
+        button#button.btn.chg.btn-lg.btn-primary(type='submit') 註冊

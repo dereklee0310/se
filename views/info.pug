@@ -1,27 +1,27 @@
 extends layout
 block head
-	link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
-	link(href='/css/info.css' rel='stylesheet')
+  link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
+  link(href='/css/info.css' rel='stylesheet')
 block title
-	title 用戶資訊 | 帕金森氏症雲端檢測服務
+  title 個人資料 | 帕金森氏症雲端檢測服務
 block content
-	body.text-center
-		main.form-register
-			form(action='#' method='post')
-				h1.h4.mb-3.fw-normal 用戶資訊
-				.form-floating.name
-					input#name.form-control(type='text' placeholder='name' name='name' disabled)
-					label(for='name') 姓名: #{name}
-				.form-floating
-					input#email.form-control(type='email' placeholder='email' name='email' disabled)
-					label(for='email') 帳號: #{email}
-				.form-floating
-					input#ID.form-control(type='text' placeholder='pid' name='pid' disabled)
-					label(for='pid') 身份證字號: #{pid}
-				.form-floating
-					input#gender.form-control(type='text' placeholder='gender' name='gender' disabled)
-					label(for='gender') 性別: #{gender}
-				.form-floating
-					input#birthday.form-control(type='text' placeholder='birth' name='birth' disabled)
-					label(for='birth') 出生年月日: #{birth}
-				a.btn.cancel.btn-lg.btn-primary(onclick="history.back()") 返回
+  div#cover.text-center
+    .form-info
+      form(action='#' method='post')
+        h1.h4.mb-3.fw-normal 個人資料
+        .form-floating
+          input#name.form-control(type='text' placeholder='name' name='name' disabled)
+          label(for='name') 姓名: #{user.name}
+        .form-floating
+          input#email.form-control(type='email' placeholder='email' name='email' disabled)
+          label(for='email') 帳號: #{user.email}
+        .form-floating
+          input#ID.form-control(type='text' placeholder='pid' name='pid' disabled)
+          label(for='pid') 身份證字號: #{user.pid}
+        .form-floating
+          input#gender.form-control(type='text' placeholder='gender' name='gender' disabled)
+          label(for='gender') 性別: #{user.gender}
+        .form-floating
+          input#birthday.form-control(type='text' placeholder='birth' name='birth' disabled)
+          label(for='birth') 出生年月日: #{user.birth}
+        a#button.btn.cancel.btn-lg.btn-primary(onclick="history.back()") 返回

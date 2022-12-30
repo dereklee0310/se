@@ -15,17 +15,17 @@ block content
         .position-sticky.pt-3.sidebar-sticky
           ul.nav.flex-column
             li.nav-item
-              a.nav-link.active(aria-current='page' href='/info')
-                span.align-text-bottom(data-feather='home')
+              a.nav-link.active(aria-current='page' href='/account/info')
+                span.align-text-bottom(data-feather='users')
                 |               個人資料
             li.nav-item
-              a.nav-link(href='/password')
-                span.align-text-bottom(data-feather='file')
+              a.nav-link(href='/account/password')
+                span.align-text-bottom(data-feather='file-text')
                 |               變更密碼
-            //- li.nav-item
-              a.nav-link(href='#')
-                span.align-text-bottom(data-feather='shopping-cart')
-                |               Products
+            li.nav-item
+              a.nav-link(href='/account/change_info')
+                span.align-text-bottom(data-feather='file-text')
+                |               變更個人資料
             //- li.nav-item
               a.nav-link(href='#')
                 span.align-text-bottom(data-feather='users')
@@ -62,9 +62,10 @@ block content
       main.col-md-9.ms-sm-auto.col-lg-10.px-md-4
         .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
           h1.h2 本次上傳結果
-        //- canvas#myChart.my-4.w-100(width='900' height='380')
-        iframe(width="900" height="800" frameborder="0" scrolling="no" src= url)
-        .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+          //test here: left: #{left} right: #{right}
+        div#chart
+            iframe(width="900" height="800" frameborder="0" scrolling="no" src= url)
+        //-.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
           .btn-toolbar.mb-2.mb-md-0
               .btn-group.me-2
                 button.btn.btn-sm.btn-outline-secondary(type='button') Share
@@ -77,19 +78,36 @@ block content
             thead
               tr
                 th(scope='col') #
-                th(scope='col') &#x6AA2;&#x6E2C;&#x9805;&#x76EE;
-                th(scope='col') &#x5730;&#x9EDE;
-                th(scope='col') &#x4E0A;&#x50B3;&#x6642;&#x9593;
-                th(scope='col') Header
+                th(scope='col') 姓名
+                th(scope='col') 性別
+                th(scope='col') 檢測項目
+                th(scope='col') 影片拍攝日期
+                th(scope='col') 拍攝地點
+                th(scope='col') 左
+                th(scope='col') 右
+                th(scope='col') 檢測時間
             tbody
-              tr
-                td 1
-                td finger tap
-                td place
-                td time
-                td text
+               for value, index in results
+                   if(index === results.length-1)
+                       tr
+                          td= index
+                          td= value.name
+                          td= value.gender
+                          if(value.type === 't23')
+                              td= '手指拍打'
+                          else if(value.type === 't24')
+                              td= '手掌握和'
+                          else if(value.type === 't25')
+                              td= '前臂迴旋'
+                          else if(value.type === 't26')
+                              td= '兩腳靈敏度'
+                          td= value.taken_date
+                          td= value.taken_location
+                          td= value.result_left
+                          td= value.result_right
+                          td= value.created_at
         h2 歷史上傳
-        .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+        //-.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
           .btn-toolbar.mb-2.mb-md-0
               .btn-group.me-2
                 button.btn.btn-sm.btn-outline-secondary(type='button') Share
@@ -102,112 +120,35 @@ block content
             thead
               tr
                 th(scope='col') #
-                th(scope='col') &#x4E0A;&#x50B3;&#x6642;&#x9593;
-                th(scope='col') Header
-                th(scope='col') Header
-                th(scope='col') Header
+                th(scope='col') 姓名
+                th(scope='col') 性別
+                th(scope='col') 檢測項目
+                th(scope='col') 影片拍攝日期
+                th(scope='col') 拍攝地點
+                th(scope='col') 左
+                th(scope='col') 右
+                th(scope='col') 檢測時間
             tbody
-              tr
-                td 1,001
-                td random
-                td data
-                td placeholder
-                td text
-              tr
-                td 1,002
-                td placeholder
-                td irrelevant
-                td visual
-                td layout
-              tr
-                td 1,003
-                td data
-                td rich
-                td dashboard
-                td tabular
-              tr
-                td 1,003
-                td information
-                td placeholder
-                td illustrative
-                td data
-              tr
-                td 1,004
-                td text
-                td random
-                td layout
-                td dashboard
-              tr
-                td 1,005
-                td dashboard
-                td irrelevant
-                td text
-                td placeholder
-              tr
-                td 1,006
-                td dashboard
-                td illustrative
-                td rich
-                td data
-              tr
-                td 1,007
-                td placeholder
-                td tabular
-                td information
-                td irrelevant
-              tr
-                td 1,008
-                td random
-                td data
-                td placeholder
-                td text
-              tr
-                td 1,009
-                td placeholder
-                td irrelevant
-                td visual
-                td layout
-              tr
-                td 1,010
-                td data
-                td rich
-                td dashboard
-                td tabular
-              tr
-                td 1,011
-                td information
-                td placeholder
-                td illustrative
-                td data
-              tr
-                td 1,012
-                td text
-                td placeholder
-                td layout
-                td dashboard
-              tr
-                td 1,013
-                td dashboard
-                td irrelevant
-                td text
-                td visual
-              tr
-                td 1,014
-                td dashboard
-                td illustrative
-                td rich
-                td data
-              tr
-                td 1,015
-                td random
-                td tabular
-                td information
-                td text
+                for value, index in results
+                   tr
+                     td= index
+                     td= value.name
+                     td= value.gender
+                     if(value.type === 't23')
+                         td= '手指拍打'
+                     else if(value.type === 't24')
+                         td= '手掌握和'
+                     else if(value.type === 't25')
+                         td= '前臂迴旋'
+                     else if(value.type === 't26')
+                         td= '兩腳靈敏度'
+                     td= value.taken_date
+                     td= value.taken_location
+                     td= value.result_left
+                     td= value.result_right
+                     td= value.created_at
+              
   script(src='https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js')
+  script(src='https://cdn.plot.ly/plotly-latest.min.js')
   script.
     feather.replace()
-    plotly.plot(data, graphOptions, function (err, msg) {
-      var a = msg.url + ".embed";
-      res.render('index',{url:a});
-      //console.log(msg.url);
-    });

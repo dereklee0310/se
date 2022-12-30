@@ -277,7 +277,44 @@ function destroy(wizard, options)
  **/
 function finishStep(wizard, state)
 {
-    var currentStep = wizard.find(".steps li").eq(state.currentIndex);
+    
+    var fname = $('#fullname').val();
+    var humanid = $(pid).val();
+    var bdate = $(birth).val();
+    var tdate = $(taken_date).val();
+    var addr = $(taken_location).val();
+    var gender = $('#gender').val();
+    var typess = $('#type').val();
+    var files = $('#video')[0].files;
+    var formData = new FormData();
+    formData.append('name',fname);
+    formData.append('pid',humanid);
+    formData.append('gender',gender);
+    formData.append('birth',bdate);
+    formData.append('taken_date',tdate);
+    formData.append('taken_location',addr);
+    formData.append('type',typess);
+    formData.append("video", files[0]);
+    $.ajax({
+        url : '/upload/waiting',
+        type : 'GET',
+        success : function(result){
+            $('html').html(result);
+        }
+    });
+    $.ajax({
+        url : '/upload',
+        type : "post",
+        mimeType : 'multipart/form-data',
+        contentType : false,
+        processData : false,
+        data : formData,
+        success:function(result){
+            $('html').html(result);
+        }
+    });
+    
+    /*var currentStep = wizard.find(".steps li").eq(state.currentIndex);
     
     if (wizard.triggerHandler("finishing", [state.currentIndex]))
     {
@@ -287,7 +324,7 @@ function finishStep(wizard, state)
     else
     {
         currentStep.addClass("error");
-    }
+    }*/
 }
 
 /**
@@ -458,16 +495,14 @@ function goToNextStep(wizard, options, state)
 {
     if(state.currentIndex == 0)
     {
-        var fname = $(first_name).val();
-        var lname = $(last_name).val();
-        var humanid = $(id).val();
+        var fname = $(fullname).val();
+        var humanid = $(pid).val();
         var date = $(birth).val();
         fname = $.trim(fname);
-        lname = $.trim(lname);
         humanid = $.trim(humanid);
         date = $.trim(date);
 
-        if(fname == '' || lname == ''|| humanid == '' || date == '')
+        if(fname == '' || humanid == '' || date == '')
         {
             alert('輸入不能為空');
         }
@@ -478,8 +513,8 @@ function goToNextStep(wizard, options, state)
     }
     else if(state.currentIndex == 1)
     {
-        var date = $(day).val();
-        var addr = $(address).val();
+        var date = $(taken_date).val();
+        var addr = $(taken_location).val();
         var file = $("#video").val();
         var fileName = getFileName(file);
         function getFileName(o){
@@ -834,13 +869,7 @@ function paginationClickHandler(event)
             break;
 
         case "finish":
-            var formdata = $('#form-register').serialize();
-            var file = $('#video').val();
-            $('#finish').click(function(){
-                $.post('/upload', {formdata, "file": file}, function(data) {
-                    alert('上傳成功');
-                }, 'json');
-            });
+            finishStep(wizard,state);
             break;
 
         case "next":
@@ -852,6 +881,7 @@ function paginationClickHandler(event)
             break;
     }
 }
+
 /**
  * Refreshs the visualization state for the entire pagination.
  *

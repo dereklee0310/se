@@ -11,21 +11,20 @@ body {
   display: flex;
 }
 
-.form-recover {
+.form-changeinfo {
   border-radius: 25px;
 /*   background-color: #f0f0f0; */
   width: 100%;
   max-width: 340px;
   padding: 15px;
   margin: auto;
-  vertical-align: auto;
 }
 
-.form-recover .form-floating:focus-within {
+.form-changeinfo .form-floating:focus-within {
   z-index: 2;
 }
 
-.form-recover input{
+.form-changeinfo input {
   margin-top: 10px;
   margin-bottom: 10px;
   /* border-top-left-radius: 0;
@@ -47,6 +46,6 @@ body {
   float: right;
 }
 
-.alert {
+#gender {
   border-radius: 20px;
 }

@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const fs = require('fs');
 const url = require('url');
 let moment = require('moment');
+const axios = require('axios');
 
 const multer = require('multer');
 const upload = multer(/*{
@@ -20,7 +21,6 @@ const upload = multer(/*{
 
 const { sql, pool } = require("../modules/db");
 const ensureAuthenticated = require('../modules/authen').ensureAuthenticated;
-
 var recoMime = function(mime){
   switch(mime){
       case 'video/mp4':
@@ -35,35 +35,31 @@ var recoMime = function(mime){
 };
 
 router.get("/", ensureAuthenticated, (req, res) => {
-  res.render("upload");
+  res.render("upload", {user: req.user});
 });
 
 
-router.post("/test",upload.single('video'), (req, res) => {
-  // result = '123'
-  // file_name = 'file'
-  // id = '3'
-  // pool.query(
-  //   `insert into upload_record values (NULL, '${req.body.first_name}', '${req.body.last_name}', '${req.body.pid}', '${req.body.gender}', '${req.body.birth}', '${req.body.taken_date}', \
-  //     '${req.body.taken_location}', '${file_name}', '${result}', '${id}')`, // todo file name
-  //   function (err, results) {
-  //     if (err)
-  //       throw err
-  //     res.send('ok')
-  //   }
-  // );
+router.post("/", ensureAuthenticated, upload.single('video'), (req, res) => {
+//   pool.query(
+//     `insert into upload_record values (NULL, "${req.body.name}", "${req.body.pid}", "${req.body.gender}", "${req.body.birth}", \
+// "${req.body.type}", "${req.body.taken_date}", "${req.body.taken_location}", "${result_left}", "${result_right}", "${file_name}", \
+// "${req.user.user_id}", default)`, // todo file name
+//     function (err, results) {
+//     if (err)
+//         throw err
+//       res.send('ok')
+//     }
+//   );
   // var {date,list} = req.body;
   // var userid = req.user._id;
   // var types = list;
-  console.log(req.body)
+  console.log('post success')
   var now_day = moment(req.body.taken_date).format('YYYYMMDD');
   var mime = recoMime(req.file.mimetype);
   // var fileBaseName = now_day+'_'+req.user.id+'_'+req.body.type;
-  var fileBaseName = now_day+'_'+'123'+'_'+req.body.type;
+  var fileBaseName = now_day+'_'+'testId'+'_'+req.body.type;
   var fileName = fileBaseName+mime;
   var fileRoot = '../openpose/testdir/files/';
-  console.log(fileName);
-  console.log(fileRoot);
   var fileRoute = fileRoot+'/'+fileName;
   var fd = fs.openSync(fileRoute,'w+'); // fd = file descriptor (檔案描述符)
   fs.writeSync(fd,req.file.buffer);
@@ -81,31 +77,32 @@ router.post("/test",upload.single('video'), (req, res) => {
     data: { "name": fileName }
   })
   .then(function(result){
-    var data = result.data;
-    console.log(result.data);
+    var data = result.data[0];
+    console.log('result' + result.data);
+    pool.query(
+    `insert into upload_record values (NULL, "${req.body.name}", "${req.body.pid}", "${req.body.gender}", "${req.body.birth}", \
+"${req.body.type}", "${req.body.taken_date}", "${req.body.taken_location}", "${data.left}", "${data.right}", "${fileName}", \
+"${req.user.user_id}", default)`, // todo file name
+    function (err, results) {
+        if (err)
+            throw err
+      res.redirect(`/history?left=${data.left}&right=${data.right}`)
+    }
+  );
 
     // res.redirect(url.format({
     //   pathname:"/upload/completed",
     //   query: {
     //       "left": String(data[0].left),
-    //       "right": String(data[0].right)
+    //       "right": String(data[0].rigsht)
     //   }
     // }));
-}) 
+})
 
 });
 
-router.post("/", ensureAuthenticated, (req, res) => {
-  result = '123'
-  file_name = 'file'
-  pool.query(
-    `insert into upload_record values (NULL, ${req.body.first_name}, ${req.body.last_name}, ${req.body.gender}, ${req.body.birth}, ${req.body.taken_date}, \
-      ${req.body.taken_location}, ${file_name}, ${result}, ${req.user.id})`, // todo file name
-    function (err, results) {
-      if (err)
-        throw err
-    }
-  );
+router.get("/waiting", ensureAuthenticated, (req, res) => {
+  res.render("waiting", {user: req.user});
 });
 
 module.exports = router;

@@ -1,11 +1,10 @@
-doctype html
-head
+extends layout
+block head
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1')
   meta(name='description' content='')
   meta(name='author' content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
   meta(name='generator' content='Hugo 0.84.0')
-  title 帕金森氏症雲端檢測服務
   link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
   // Bootstrap core CSS
   link(href='/assets/dist/css/bootstrap.min.css' rel='stylesheet')
@@ -27,32 +26,41 @@ head
 
   // after convert html to pug, the body tag disappear
   // add "body.text-center", otherwise the elements in form will not be aligned
-body.text-center
-  main.form-signin
-    form(action="./login" method="post")
-      // img.mb-4(src='/assets/brand/bootstrap-logo.svg' alt='' width='72' height='57')
-      img.mb-4(src='/images/logo.jpg' alt='')
-      //- h1.h4.mb-3.fw-normal 請登入
-      //- put warning here
-      if msg === 'failed'
-        .alert.alert-danger
-          strong 帳號或密碼錯誤!
-      if msg === 'required'
-        .alert.alert-info
-          strong 請登入以使用該功能
-        //- div 請檢查您的帳戶名稱和密碼後再試一次
-      .form-floating
-        input#floatingInput.form-control(type='email' placeholder='name@example.com' name="account" required)
-        label(for='floatingInput') 帳號名稱(電子郵件)
-      .form-floating
-        input#floatingPassword.form-control(type='password' placeholder='Password' name="password" required)
-        label(for='floatingPassword') 密碼
-      .checkbox.mb-3
-        label
-          input(type='checkbox' value='remember-me')
-          |  保持登入狀態
-      a(href='./recover').fgpwd 忘記密碼？
-      button.w-100.btn.btn-lg.btn-primary(type='submit') 登入
-      | 還沒有帳號嗎?
-      a(href='./signup') 註冊
-    //-   p.mt-5.mb-3.text-muted &copy; 2017&ndash;2021
+block title
+    title 帕金森氏症雲端檢測服務
+block content
+    div#cover
+      .form-signin.text-center
+        form(action="./login" method="post")
+          // img.mb-4(src='/assets/brand/bootstrap-logo.svg' alt='' width='72' height='57')
+          img.mb-4(src='/images/logo.jpg' alt='')
+          //- h1.h4.mb-3.fw-normal 請登入
+          //- put warning here
+          if msg === 'failed'
+            .alert.alert-danger
+              strong 帳號或密碼錯誤!
+          else if msg === 'required'
+            .alert.alert-info
+              strong 請登入以使用該功能
+          else if msg === 'signupSuccess'
+            .alert.alert-success
+              strong 註冊成功! 請登入
+          else if msg === 'recover'
+            .alert.alert-success
+              strong 新密碼已發送至您的信箱<br>請使用新密碼登入
+            //- div 請檢查您的帳戶名稱和密碼後再試一次
+          .form-floating
+            input#floatingInput.form-control(type='email' placeholder='name@example.com' name="account" required)
+            label(for='floatingInput') 帳號名稱(電子郵件)
+          .form-floating
+            input#floatingPassword.form-control(type='password' placeholder='Password' name="password" required)
+            label(for='floatingPassword') 密碼
+          .checkbox.mb-3
+            label
+              input(type='checkbox' value='remember-me')
+              |  保持登入狀態
+          a(href='./recover').fgpwd 忘記密碼？
+          button.w-100.btn.btn-lg.btn-primary(type='submit') 登入
+          | 還沒有帳號嗎?
+          a(href='./signup') 註冊
+        //-   p.mt-5.mb-3.text-muted &copy; 2017&ndash;2021

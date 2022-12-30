@@ -1,0 +1,27 @@
+extends layout
+block head
+    style.
+        body{
+            height: 100%;
+            width: 100%;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        main{
+            height: 100%;
+            width: 100%;
+        }
+        #cover{
+            height: 100%;
+            display:  flex;
+            align-items: center;
+            justify-content:  center;
+        }
+block title
+    title 等待中
+block content
+    div#cover
+        div
+            img(src='/images/waiting.gif')
+        div
+            h2 處理中，請等待兩到三分鐘

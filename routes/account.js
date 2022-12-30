@@ -23,21 +23,25 @@ router.get('/login', (req, res) => {
   if (req.query.failed === 'true')
     res.render('login', {msg: 'failed'});
   else if (req.query.required === 'true')
-    res.render('login', {msg: 'required'})
+    res.render('login', {msg: 'required'});
+  else if (req.query.signupSuccess === 'true')
+      res.render('login', {msg: 'signupSuccess'});
+  else if (req.query.recover === 'true')
+      res.render('login', {msg: 'recover'})
   else
-    res.render('login')
+    res.render('login');
 }); 
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
+  successRedirect: '/home/?login=true',
   failureRedirect: '/account/login?failed=true'
 }))
 
 router.get('/signup', (req, res) => {
   if (req.query.failed === 'true')
-    res.render('signup', {msg: 'failed'})
+    res.render('signup', {msg: 'failed', user: req.user})
   else
-    res.render('signup');
+    res.render('signup', {user: req.user});
 });
 
 router.post('/signup', (req, res) => {
@@ -53,11 +57,11 @@ router.post('/signup', (req, res) => {
       hash_val = bcrypt.hashSync(req.body.password, 10); //todo change this into async
       pool.query(
         'insert into user' +
-        ` values(NULL, "${req.body.first_name}", "${req.body.last_name}", "${req.body.email}", "${hash_val}", "${req.body.pid}", "${req.body.gender}", "${req.body.birth}", default)`,
+        ` values(NULL, "${req.body.name}", "${req.body.email}", "${hash_val}", "${req.body.pid}", "${req.body.gender}", "${req.body.birth}", default)`,
         function (err, results) {
           if (err)
             throw err;
-          res.redirect('/home/?signupSuccess=true')
+          res.redirect('/account/login?signupSuccess=true')
         }
       );
     }
@@ -100,35 +104,44 @@ router.post('/recover', (req, res) => {
 });
 
 router.get('/password', ensureAuthenticated, (req, res) => {
-  res.render('password');
+  res.render('password', {user: req.user});
 });
 
 router.post('/password', ensureAuthenticated, (req, res) => {
   hash_val = bcrypt.hashSync(req.body.new_password, 10); //todo change this into async
   pool.query(`update user set password = "${hash_val}" where email = "${req.user.email}"`, function (err, results) {
-    res.redirect('/home?changePassword=true')
+    res.redirect('/home/?change_password=true')
   })
 });
 
 router.get('/info', ensureAuthenticated, (req, res) => {
-  user = req.user
-  if (user.gender === 'male')
-    gender = '男'
-  else if (user.gender === 'female')
-    gender = '女'
-  else
-    gender = '第三性別'
-  res.render('info', {first_name: user.first_name, last_name: user.last_name, email: user.email, pid: user.pid, gender: gender, birth: user.birth});
-  // res.render('info'); //todo
+  res.render('info', {user: req.user});
+//   res.render('info', {gender: gender}); //todo
+//    res.render('info', {user: req.user, gender: req.user.gender})
 });
 
 router.get('/logout', ensureAuthenticated, function(req, res, next) {
   req.logOut(function(err) {
     if(err)
       return next(err);
-    req.session.status = 'logout'
-    res.redirect('/home')
+    req.user = null;
+    req.session.destroy()
+    res.redirect('/home/?logout=true')
   })
 })
+
+router.get('/change_info', ensureAuthenticated, (req, res) => {
+  res.render('change_info', {user: req.user});
+});
+
+router.post('/change_info', ensureAuthenticated, (req, res) => {
+//   console.log(req.body)
+//   console.log(req)
+  pool.query(`update user set name = "${req.body.name}", pid = "${req.body.pid}", gender = "${req.body.gender}", birth = "${req.body.birth}" where email = "${req.user.email}"`, function (err, results) {
+      if(err)
+        throw err
+    })
+   res.redirect('/home/?change_info=true');
+});
 
 module.exports = router;

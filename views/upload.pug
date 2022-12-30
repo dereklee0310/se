@@ -1,136 +1,132 @@
-doctype html
-head
-  meta(charset='utf-8')
-  title 上傳系統
-  // Mobile Specific Metas
-  meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
-  // Font
-  link(rel='stylesheet' type='text/css' href='css/opensans-font.css')
-  link(rel='stylesheet' type='text/css' href='fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')
-  // datepicker
-  link(rel='stylesheet' type='text/css' href='css/jquery-ui.min.css')
-  // Main Style Css
-  link(rel='stylesheet' href='css/style.css')
-.page-content
-  .wizard-heading 上傳系統
-  .wizard-v6-content
-    .wizard-form
-      form#form-register.form-register(action='#' method='post')
-        #form-total
-          // SECTION 1
-          h2
-            p.step-icon
-              span 1
-            span.step-text 個人資訊
-          section
-            .inner
-              .form-heading
-                h3 個人資訊
-                span 1/3
-              .form-row
-                .form-holder
-                  label.form-row-inner
-                    input#first_name.form-control(type='text' name='first_name' required='true' )
-                    span.label 名:
-                .form-holder
-                  label.form-row-inner
-                    input#last_name.form-control(type='text' name='last_name' required='')
-                    span.label 姓:
-              .form-row
-                //.form-holder
-                  label.form-row-inner
-                    input#phone.form-control(type='text' name='phone' required='')
-                    span.label 電話
-                .form-holder.form-holder-2
-                  label.form-row-inner
-                    input#id.form-control(type='text' name='id' required='')
-                    span.label 身分證字號:
-              .form-row
-                .form-holder
-                  label.form-row-inner
-                    label.special-label(for='gender') 性別:
-                    select#gender.form-control(name='gender')
-                      option(value='Male' selected='') 男
-                      option(value='Female') 女
-                .form-holder
-                  label.special-label-1(for='birth') 出生年月日:
-                  input#birth.day(type='text' name='birth' placeholder='請選擇日期')
-                  span.select-btn
-                    i.zmdi.zmdi-chevron-down
-          // SECTION 2
-          h2
-            p.step-icon
-              span 2
-            span.step-text 上傳
-          section
-            .inner
-              .form-heading
-                h3 上傳影片
-                span 2/3
-              .form-row
-                .form-holder.form-holder-2
-                  label.special-label-1(for='types') 選擇檢測項目:
-                  select#types.form-control(name='types')
-                    option(value='finger tap' selected='') 手指拍打
-                    option(value='palm grip') 手掌握合
-                    option(value='forearm rotation') 前臂迴旋
-                    option(value='lift feet') 抬腳
-                  span.select-btn
-                    i.zmdi.zmdi-chevron-down
-              .form-row
-                .form-holder.form-holder-2
-                  label.form-row-inner
-                    input#address.form-control(type='text' name='address' required='')
-                    span.label 拍攝地址:
-              .form-row
-                .form-holder.form-holder-2
-                  label.special-label-1(for='day') 拍攝日期:
-                  input#day.day(type='text' name='day' placeholder='請選擇日期')
-                  span.select-btn
-                    i.zmdi.zmdi-chevron-down
-              .form-row
-                .form-holder.form-holder-2
-                  label.special-label-2(for='video') 選擇影片
-                    input#video(name='video' style='display:none;' type='file' onchange="readURL(this);" accept='video/x-msvideo,video/mp4,video/quicktime' required)
-                    i.zmdi.zmdi-cloud-upload
-          // SECTION 3
-          h2
-            p.step-icon
-              span 3
-            span.step-text 確認
-          section
-            .inner
-              .form-heading
-                h3 確認資訊
-                span 3/3
-              .table-responsive
-                table.table
-                  tbody
-                    tr.space-row
-                      th 全名:
-                      td#fullname-val
-                    tr.space-row
-                      th 性別:
-                      td#gender-val
-                    tr.space-row
-                      th 身分證字號:
-                      td#id-val
-                    tr.space-row
-                      th 出生年月日:
-                      td#birth-val
-                    tr.space-row
-                      th 拍攝地址:
-                      td#address-val
-                    tr.space-row
-                      th 檢測項目:
-                      td#types-val
-                    tr.space-row
-                      th 拍攝日期:
-                      td#day-val
-                    tr.space-row
-                      th 影片名稱:
-                      td#video-val
-script(src='js/jquery-3.3.1.min.js')
-script(src='js/jquery.steps.js')
-script(src='js/jquery-ui.min.js')
-script(src='js/main.js')
+extends layout
+block head
+      meta(charset='utf-8')
+
+      // Mobile Specific Metas
+      meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+      // Font
+      link(rel='stylesheet' type='text/css' href='css/opensans-font.css')
+      link(rel='stylesheet' type='text/css' href='fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')
+      // datepicker
+      link(rel='stylesheet' type='text/css' href='css/jquery-ui.min.css')
+      // Main Style Css
+      link(rel='stylesheet' href='css/style.css')
+block title
+    title 上傳系統
+block content
+    .page-content
+      .wizard-heading 上傳系統
+      .wizard-v6-content
+        .wizard-form
+          form#form-register.form-register(action='#' method='post' enctype="multipart/form-data")
+            #form-total
+              // SECTION 1
+              h2
+                p.step-icon
+                  span 1
+                span.step-text 個人資訊
+              section
+                .inner
+                  .form-heading
+                    h3 個人資訊
+                    span 1/3
+                  .form-row
+                    .form-holder
+                      label.form-row-inner
+                        input#fullname.form-control(type='text' name='name' required='true' )
+                        span.label 姓名:
+                    .form-holder
+                      label.form-row-inner
+                        input#pid.form-control(type='text' name='pid' required='')
+                        span.label 身分證字號:
+                  .form-row
+                    .form-holder
+                      label.form-row-inner
+                        label.special-label(for='gender') 性別:
+                        select#gender.form-control(name='gender')
+                          option(value='男' selected='') 男
+                          option(value='女') 女
+                          option(value='第三性別') 第三性別
+                    .form-holder
+                      label.special-label-1(for='birth') 出生年月日:
+                      input#birth.day(type='text' name='birth' placeholder='請選擇日期')
+                      span.select-btn
+                        i.zmdi.zmdi-chevron-down
+              // SECTION 2
+              h2
+                p.step-icon
+                  span 2
+                span.step-text 上傳
+              section
+                .inner
+                  .form-heading
+                    h3 上傳影片
+                    span 2/3
+                  .form-row
+                    .form-holder.form-holder-2
+                      label.special-label-1(for='type') 選擇檢測項目:
+                      select#type.form-control(name='type')
+                        option(value='t23' selected='') 手指拍打
+                        option(value='t24') 手掌握合
+                        option(value='t25') 前臂迴旋
+                        option(value='t26') 抬腳
+                      span.select-btn
+                        i.zmdi.zmdi-chevron-down
+                  .form-row
+                    .form-holder.form-holder-2
+                      label.form-row-inner
+                        input#taken_location.form-control(type='text' name='taken_location' required='')
+                        span.label 拍攝地址:
+                  .form-row
+                    .form-holder.form-holder-2
+                      label.special-label-1(for='taken_date') 拍攝日期:
+                      input#taken_date.day(type='text' name='taken_date' placeholder='請選擇日期')
+                      span.select-btn
+                        i.zmdi.zmdi-chevron-down
+                  .form-row
+                    .form-holder.form-holder-2
+                      label.special-label-2(for='video') 選擇影片
+                        input#video(name='video' style='display:none;' type='file' accept='video/x-msvideo,video/mp4,video/quicktime' required)
+                        i.zmdi.zmdi-cloud-upload
+              // SECTION 3
+              h2
+                p.step-icon
+                  span 3
+                span.step-text 確認
+              section
+                .inner
+                  .form-heading
+                    h3 確認資訊
+                    span 3/3
+                  .table-responsive
+                    table.table
+                      tbody
+                        tr.space-row
+                          th 全名:
+                          td#fullname-val
+                        tr.space-row
+                          th 性別:
+                          td#gender-val
+                        tr.space-row
+                          th 身分證字號:
+                          td#pid-val
+                        tr.space-row
+                          th 出生年月日:
+                          td#birth-val
+                        tr.space-row
+                          th 拍攝地址:
+                          td#taken_location-val
+                        tr.space-row
+                          th 檢測項目:
+                          td#type-val
+                        tr.space-row
+                          th 拍攝日期:
+                          td#taken_date-val
+                        tr.space-row
+                          th 影片名稱:
+                          td#video-val
+block script
+    script(src='js/jquery-3.3.1.min.js')
+    script(src='js/jquery.steps.js')
+    script(src='js/jquery-ui.min.js')
+    script(src='js/main.js')

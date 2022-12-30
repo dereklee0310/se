@@ -67,7 +67,7 @@ block content
       .carousel-item.active( width='auto' height='50%')
         //- svg.bd-placeholder-img(width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' preserveaspectratio='xMidYMid slice' focusable='false')
           rect(width='100%' height='100%' fill='#777')
-        img.mb-4(src='/images/parkinsons_symptoms.jpg' alt='' )
+        img.img-fluid.mb-4(src='/images/parkinsons_symptoms.jpg' alt='' )
         //- .container
           .carousel-caption.text-start
             h1 Example headline.
@@ -131,7 +131,7 @@ block content
         h2.fw-normal 關於我們
         p 透過"更多資訊"可以得到關於本軟體的更多情報，包含本產品的"功能"，以及所使用到的"技術"，亦可獲得"醫院"相關情報。
         p.click
-          a.btn.btn-secondary.btn-lg(href='aboutus') 更多資訊 &raquo;
+          a.btn.btn-secondary.btn-lg(href='#aboutus') 更多資訊 &raquo;
       // /.col-lg-4
     // /.row
     
@@ -167,7 +167,6 @@ block content
           | 留給以後合作的醫院更改
       .col-md-5
         img.mb-4(src='/images/about_us_3.png' alt='' height='94%' width='85%')
-    hr.featurette-divider
     // /END THE FEATURETTES
 
     hr#contactus.featurette-divider
@@ -208,12 +207,13 @@ block content
                           input.btn.btn-primary(type='submit' value='送出信息' onclick='submitHandler();')
                           a#mailTo
     hr.featurette-divider
+block script
   script.
     //宣告預設表單內容為空 （你想要的話也可以加東西）
     var initSubject='',initBody='';
     //按下傳送按鈕後執行
     function submitHandler(){
-      var to = "contact@example.com";//寫死的傳送對象 就是公司的信箱 不會顯示在網頁上
+      var to = "parkinson.se.test@gmail.com";//寫死的傳送對象 就是公司的信箱 不會顯示在網頁上
       var name = nameText.value;//讀取ID為 nameTextuser 物件中的值
       var email = emailText.value;
       var subject = subText.value;
@@ -224,7 +224,6 @@ block content
     //傳送的主要程式碼
       mailTo.href="mailto:"+to+"?subject="+subject+"&body="+body;
       mailTo.click();
-      console.log(mailTo.href);
       show();
     }
     //在body onload
@@ -237,4 +236,3 @@ block content
       var element1 = document.getElementById("sent");
       element1.style.display = "block";
     }
-

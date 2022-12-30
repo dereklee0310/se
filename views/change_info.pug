@@ -1,0 +1,28 @@
+extends layout
+block head
+  link(rel='canonical' href='https://getbootstrap.com/docs/5.0/examples/sign-in/')
+  link(href='/css/change_info.css' rel='stylesheet')
+block title
+  title 修改個人資料 | 帕金森氏症雲端檢測服務
+block content
+  div#cover.text-center
+    .form-changeinfo
+      form(action='#' method='post')
+        h1.h4.mb-3.fw-normal 修改個人資料
+        .form-floating.name
+          input#name.form-control(type='text' placeholder='name' name='name' required)
+          label(for='name') 姓名: #{user.name}
+        .form-floating
+          input#ID.form-control(type='text' placeholder='pid' name='pid' required)
+          label(for='pid') 身份證字號: #{user.pid}
+        .form-floating
+          select#gender.form-control(name='gender' required)
+            option(value='男') 男
+            option(value='女') 女
+            option(value='第三性別') 第三性別
+          label(for='gender') 性別: #{user.gender}
+        .form-floating
+          input#birthday.form-control(type='date' placeholder='birth' name='birth' required)
+          label(for='birth') 出生年月日: #{user.birth}
+        a#button.btn.cancel.btn-lg.btn-primary(onclick="history.back()") 返回
+        button#button.btn.chg.btn-lg.btn-primary(type='submit') 確定
